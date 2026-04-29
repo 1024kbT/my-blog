@@ -1,7 +1,7 @@
 // 统一放第三方集成参数，后面只需要改这里。
 export const goatcounterConfig = {
   // 例如：my-blog-stats；对应 https://my-blog-stats.goatcounter.com
-  code: "1024kbt",
+  code: "lwq",
 };
 
 export const trackedPages = [
