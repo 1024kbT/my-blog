@@ -1,7 +1,7 @@
 // 统一放第三方集成参数，后面只需要改这里。
 export const goatcounterConfig = {
   // 例如：my-blog-stats；对应 https://my-blog-stats.goatcounter.com
-  code: "",
+  code: "1024kbt",
 };
 
 export const trackedPages = [
@@ -13,17 +13,14 @@ export const trackedPages = [
 ];
 
 export const giscusConfig = {
-  // 例如：1024kbT/my-blog
-  repo: "",
-  // 例如：R_kgDOxxxxxx
-  repoId: "",
-  // 例如：General
-  category: "",
-  // 例如：DIC_kwDOxxxxxx4Cxxxx
-  categoryId: "",
+  repo: "1024kbt/my-blog",
+  repoId: "R_kgDOSPrnUw",
+  category: "Announcements",
+  categoryId: "DIC_kwDOSPrnU84C786k",
   mapping: "pathname",
   strict: false,
   reactionsEnabled: true,
   inputPosition: "top",
   lang: "zh-CN",
+  loading: "lazy",
 };
