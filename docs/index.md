@@ -55,32 +55,32 @@ features:
 ## 最新文章
 
 <div class="home-post-grid">
-  <a class="home-post-card" href="/posts/ai-architecture/overall-architecture-layered-design">
+  <a class="home-post-card" href="./posts/ai-architecture/overall-architecture-layered-design">
     <span class="home-post-card__tag">AI 助手总览</span>
     <h3>整体架构与分层设计</h3>
     <p>从终端交互层到基础设施层，快速建立整个系统的认知地图。</p>
   </a>
-  <a class="home-post-card" href="/posts/ai-architecture/opencode-technical-architecture-overview">
+  <a class="home-post-card" href="./posts/ai-architecture/opencode-technical-architecture-overview">
     <span class="home-post-card__tag">AI 助手总览</span>
     <h3>OpenCode 技术架构文档</h3>
     <p>从数据流、模块划分和系统定位出发，看一套终端 AI 助手如何组成整体。</p>
   </a>
-  <a class="home-post-card" href="/posts/ai-core/agent-multi-turn-dialog-engine-design">
+  <a class="home-post-card" href="./posts/ai-core/agent-multi-turn-dialog-engine-design">
     <span class="home-post-card__tag">AI 助手核心能力</span>
     <h3>Agent 多轮对话引擎设计</h3>
     <p>围绕异步执行、事件流与取消机制，拆开终端 Agent 的核心对话引擎。</p>
   </a>
-  <a class="home-post-card" href="/posts/ai-core/llm-multi-provider-integration-design">
+  <a class="home-post-card" href="./posts/ai-core/llm-multi-provider-integration-design">
     <span class="home-post-card__tag">AI 助手核心能力</span>
     <h3>LLM 多提供商集成设计</h3>
     <p>统一抽象不同模型厂商的 API，让切换模型和能力检测都更可控。</p>
   </a>
-  <a class="home-post-card" href="/posts/architecture/frontend-architecture-design">
+  <a class="home-post-card" href="./posts/architecture/frontend-architecture-design">
     <span class="home-post-card__tag">架构</span>
     <h3>前端项目架构设计指南</h3>
     <p>结合 Vue 2 + TypeScript 项目，整理分层、目录、类型与工程规范。</p>
   </a>
-  <a class="home-post-card" href="/posts/ai/claude-code-architecture-governance-engineering-practice">
+  <a class="home-post-card" href="./posts/ai/claude-code-architecture-governance-engineering-practice">
     <span class="home-post-card__tag">AI 工程</span>
     <h3>你不知道的 Claude Code：架构、治理与工程实践</h3>
     <p>从上下文、技能、工具、Hook 与子代理出发，梳理 AI 编程代理的工程方法。</p>
@@ -90,17 +90,17 @@ features:
 ## 专题导航
 
 <div class="home-topic-grid">
-  <a class="home-topic-card" href="/posts/ai-architecture/overall-architecture-layered-design">
+  <a class="home-topic-card" href="./posts/ai-architecture/overall-architecture-layered-design">
     <span class="home-topic-card__kicker">SERIES 01</span>
     <h3>终端 AI 助手架构</h3>
     <p>适合按顺序阅读，从系统总览一路看到核心能力和基础设施设计。</p>
   </a>
-  <a class="home-topic-card" href="/posts/architecture/frontend-architecture-design">
+  <a class="home-topic-card" href="./posts/architecture/frontend-architecture-design">
     <span class="home-topic-card__kicker">SERIES 02</span>
     <h3>前端架构与协作</h3>
     <p>聚焦前端项目分层、AI 协作提示词和编码执行准则，偏工程落地。</p>
   </a>
-  <a class="home-topic-card" href="/posts/essay/city-night-riding">
+  <a class="home-topic-card" href="./posts/essay/city-night-riding">
     <span class="home-topic-card__kicker">SERIES 03</span>
     <h3>生活与随笔</h3>
     <p>留一点不那么工具化的内容，把感受、节奏和观察也放进这个站点里。</p>
