@@ -1,7 +1,8 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 
-// GitHub Pages 下如果使用用户/仓库路径，这里可以按需改成仓库名。
+// GitHub Pages 项目仓库部署时，需要把 base 设为仓库名路径。
 export default defineConfig({
+  base: "/my-blog/",
   plugins: [vue()],
 });
