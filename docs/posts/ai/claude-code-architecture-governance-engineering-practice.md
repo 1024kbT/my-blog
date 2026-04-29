@@ -251,9 +251,9 @@ description: Use for PR reviews with focus on correctness.
 
 还有一个很重要的 disable-auto-invoke 使用策略：
 
-- 高频（>1 次/会话）→ 保持 auto-invoke，优化描述符
-- 低频（<1 次/会话）→ disable-auto-invoke，手动触发，描述符完全脱离上下文
-- 极低频（<1 次/月）→ 移除 Skill，改为 AGENTS.md 中的文档
+- 高频（大于 1 次/会话）→ 保持 auto-invoke，优化描述符
+- 低频（小于 1 次/会话）→ disable-auto-invoke，手动触发，描述符完全脱离上下文
+- 极低频（小于 1 次/月）→ 移除 Skill，改为 AGENTS.md 中的文档
 
 ## **Skills 反模式**
 
@@ -412,7 +412,7 @@ Claude Code 的 Prompt 顺序：
 - 非确定性地打乱工具定义顺序
 - 会话中途增删工具
 
-那像当前时间这种动态信息怎么办？别去动系统 Prompt，放到下一条消息里传进去就行。Claude Code 自己也是这么做的，用户消息里加 <system-reminder> 标签，系统 Prompt 不动，缓存也就不会被打坏。
+那像当前时间这种动态信息怎么办？别去动系统 Prompt，放到下一条消息里传进去就行。Claude Code 自己也是这么做的，用户消息里加 `&lt;system-reminder&gt;` 这样的标签，系统 Prompt 不动，缓存也就不会被打坏。
 
 ## **会话中途不要切换模型**
 
