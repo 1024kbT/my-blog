@@ -20,7 +20,6 @@
 - 2026-04-29 [你不知道的 Claude Code：架构、治理与工程实践](/posts/ai/claude-code-architecture-governance-engineering-practice)
 - 2026-04-29 [AI 开发协作 Prompt（Vue2 + TypeScript + class 风格）](/posts/engineering/ai-collaboration-prompt-vue2-typescript)
 - 2026-04-29 [Karpathy Coding Guidelines：编码约束与执行准则](/posts/engineering/karpathy-coding-guidelines)
-- 2026-04-29 [项目管理绩效域学习笔记](/posts/management/project-performance-domains-notes)
 - 2026-04-29 [把个人博客从展示页收成内容系统](/posts/dev/from-showcase-to-content-system)
 - 2026-04-29 [GitHub Pages + VitePress 的部署踩坑记录](/posts/dev/github-pages-vitepress-notes)
 - 2026-04-29 [城市夜骑之后，我重新理解了慢节奏](/posts/essay/city-night-riding)

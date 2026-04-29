@@ -35,10 +35,6 @@
 - [配置管理设计](/posts/ai-infra/configuration-management-design)
 - [事件总线 (Pub/Sub) 设计](/posts/ai-infra/event-bus-design)
 
-## 项目管理
-
-- [项目管理绩效域学习笔记](/posts/management/project-performance-domains-notes)
-
 ## 随笔
 
 - [城市夜骑之后，我重新理解了慢节奏](/posts/essay/city-night-riding)
