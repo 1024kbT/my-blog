@@ -2,12 +2,12 @@
 layout: home
 
 hero:
-  name: Astra Flux
-  text: 一个更像内容站的 VitePress 博客
-  tagline: 用 Markdown 写文章，用 GitHub Pages 免费部署，把个人博客收成长期可维护的形态。
+  name: 忘西的博客
+  text: 记录生活、想法与技术折腾
+  tagline: 用 Markdown 写文章，把零散灵感慢慢整理成能长期留下来的内容。
   image:
     src: /logo.svg
-    alt: Astra Flux
+    alt: 忘西的博客
   actions:
     - theme: brand
       text: 开始阅读
@@ -27,6 +27,14 @@ features:
 
 ## 最近更新
 
-- [城市夜骑之后，我重新理解了慢节奏](/posts/essay/city-night-riding)
-- [把个人博客从展示页收成内容系统](/posts/dev/from-showcase-to-content-system)
-- [GitHub Pages + VitePress 的部署踩坑记录](/posts/dev/github-pages-vitepress-notes)
+- [整体架构与分层设计](/posts/ai-architecture/overall-architecture-layered-design)
+- [OpenCode 技术架构文档](/posts/ai-architecture/opencode-technical-architecture-overview)
+- [构建终端 AI 助手的核心功能清单](/posts/ai-architecture/core-feature-build-checklist)
+- [Agent 多轮对话引擎设计](/posts/ai-core/agent-multi-turn-dialog-engine-design)
+- [LLM 多提供商集成设计](/posts/ai-core/llm-multi-provider-integration-design)
+- [工具集 (Tool System) 设计](/posts/ai-core/tool-system-design)
+- [配置管理设计](/posts/ai-infra/configuration-management-design)
+- [日志系统设计](/posts/ai-infra/logging-system-design)
+- [前端项目架构设计指南](/posts/architecture/frontend-architecture-design)
+- [你不知道的 Claude Code：架构、治理与工程实践](/posts/ai/claude-code-architecture-governance-engineering-practice)
+- [AI 开发协作 Prompt（Vue2 + TypeScript + class 风格）](/posts/engineering/ai-collaboration-prompt-vue2-typescript)

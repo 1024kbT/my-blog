@@ -1,4 +1,4 @@
-# Astra Flux
+# 忘西的博客
 
 一个基于 **VitePress** 搭建、部署到 **GitHub Pages** 的个人博客项目。
 

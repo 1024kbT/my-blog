@@ -1,12 +1,13 @@
 :root {
-  --vp-c-brand-1: #73f0ff;
-  --vp-c-brand-2: #55cde2;
-  --vp-c-brand-3: #2fb2ca;
-  --vp-c-brand-soft: rgba(115, 240, 255, 0.14);
+  /* 用更柔和的暖棕色替换原来的亮蓝色，降低侧边栏选中态的突兀感。 */
+  --vp-c-brand-1: #b67b4d;
+  --vp-c-brand-2: #9d6840;
+  --vp-c-brand-3: #855536;
+  --vp-c-brand-soft: rgba(182, 123, 77, 0.14);
   --vp-home-hero-name-color: #eef2ff;
   --vp-home-hero-image-background-image:
-    radial-gradient(circle at top, rgba(115, 240, 255, 0.18), transparent 35%),
-    radial-gradient(circle at 40% 20%, rgba(154, 124, 255, 0.24), transparent 30%);
+    radial-gradient(circle at top, rgba(182, 123, 77, 0.16), transparent 35%),
+    radial-gradient(circle at 40% 20%, rgba(129, 96, 74, 0.2), transparent 30%);
   --vp-home-hero-image-filter: blur(38px);
 }
 
@@ -21,6 +22,18 @@
 
 .VPFeature {
   border-radius: 18px;
+}
+
+/* 让侧边栏当前项更像“轻提示”，而不是一块抢眼的高亮色块。 */
+.VPSidebarItem .link.active,
+.VPSidebarItem .link[aria-current="page"] {
+  border-radius: 12px;
+  background: rgba(182, 123, 77, 0.12);
+}
+
+.VPSidebarItem .link.active .text,
+.VPSidebarItem .link[aria-current="page"] .text {
+  font-weight: 600;
 }
 
 .vp-extension {
@@ -105,7 +118,7 @@
 .vp-chart-bar {
   width: 100%;
   border-radius: 10px;
-  background: linear-gradient(180deg, #73f0ff 0%, #9a7cff 100%);
+  background: linear-gradient(180deg, #b67b4d 0%, #d1a17a 100%);
 }
 
 .vp-chart-label {
