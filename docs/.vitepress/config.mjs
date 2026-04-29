@@ -93,11 +93,6 @@ export default defineConfig({
             { text: "事件总线 (Pub/Sub) 设计", link: "/posts/ai-infra/event-bus-design" },
           ],
         },
-        {
-          text: "管理",
-          collapsed: false,
-          items: [{ text: "项目管理绩效域学习笔记", link: "/posts/management/project-performance-domains-notes" }],
-        },
       ],
     },
     footer: {
