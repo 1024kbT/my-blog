@@ -13,6 +13,7 @@ export default defineConfig({
     nav: [
       { text: "归档", link: "/pages/archives" },
       { text: "标签", link: "/pages/tags" },
+      { text: "数据", link: "/pages/site-data" },
     ],
     search: {
       provider: "local",

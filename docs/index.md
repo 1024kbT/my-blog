@@ -3,15 +3,15 @@ layout: home
 
 hero:
   name: 忘西的博客
-  text: 记录系统设计、生活观察与长期思考
-  tagline: 把零散灵感整理成可检索、可沉淀、可持续更新的个人内容中枢。
+  text: 记录系统设计、产品实现与长期写作
+  tagline: 一个更偏内容型的技术博客，收纳架构思考、AI 工程实践、前端协作方法和少量生活观察。
   image:
     src: /logo.svg
     alt: 忘西的博客
   actions:
     - theme: brand
-      text: 进入专题
-      link: /posts/ai-architecture/overall-architecture-layered-design
+      text: 阅读最新文章
+      link: /posts/engineering/how-i-organize-long-term-technical-writing
     - theme: alt
       text: 查看归档
       link: /pages/archives
@@ -25,29 +25,25 @@ features:
     details: 已预留评论、统计与自动部署能力，站点可以继续向更完整的内容产品演进。
 ---
 
-<div class="home-tech-band">
-  <div class="home-tech-band__panel">
-    <span class="home-tech-band__label">NOW SIGNAL</span>
-    <h2>把博客做成一个会持续生长的知识界面</h2>
+<div class="home-overview">
+  <div class="home-overview__intro">
+    <span class="home-overview__label">ABOUT THIS SITE</span>
     <p>
-      这里不只是放文章，而是把技术拆解、架构思考、项目方法和生活随笔整理成能被长期回看的内容系统。
+      这里不只是放文章，也不想把它做成太像“作品封面”的首页。我更希望它像一个稳定的技术写作空间：内容可以被分类、被检索、被回看，也能随着时间慢慢长大。
     </p>
   </div>
-  <div class="home-tech-band__grid">
-    <div class="home-tech-stat">
-      <span class="home-tech-stat__label">专题</span>
-      <strong>AI 助手架构</strong>
-      <p>从总览、核心能力到基础设施，形成一条完整的阅读路径。</p>
+  <div class="home-overview__stats">
+    <div class="home-overview__stat">
+      <strong>25+</strong>
+      <span>文章</span>
     </div>
-    <div class="home-tech-stat">
-      <span class="home-tech-stat__label">写作方式</span>
-      <strong>Markdown First</strong>
-      <p>先沉淀内容，再组织展示，减少为排版本身付出的精力。</p>
+    <div class="home-overview__stat">
+      <strong>8</strong>
+      <span>专题分组</span>
     </div>
-    <div class="home-tech-stat">
-      <span class="home-tech-stat__label">当前状态</span>
-      <strong>持续补全中</strong>
-      <p>一边写、一边整理分类，让博客从展示页变成真正的内容库。</p>
+    <div class="home-overview__stat">
+      <strong>4</strong>
+      <span>标签方向</span>
     </div>
   </div>
 </div>
@@ -55,6 +51,21 @@ features:
 ## 最新文章
 
 <div class="home-post-grid">
+  <a class="home-post-card" href="./posts/engineering/how-i-organize-long-term-technical-writing">
+    <span class="home-post-card__tag">AI 工程</span>
+    <h3>我如何整理长期技术写作的素材池</h3>
+    <p>从临时笔记、项目文档到正式文章，怎么把零散内容慢慢整理成真正能发布的博客文章。</p>
+  </a>
+  <a class="home-post-card" href="./posts/architecture/building-a-maintainable-frontend-blog-system">
+    <span class="home-post-card__tag">架构</span>
+    <h3>做一个可维护的前端博客系统，我会先守住什么</h3>
+    <p>不是先卷花哨效果，而是先把内容结构、发布路径、分类方式和长期维护成本想清楚。</p>
+  </a>
+  <a class="home-post-card" href="./posts/essay/what-a-good-personal-blog-feels-like">
+    <span class="home-post-card__tag">随笔</span>
+    <h3>一个好的个人博客，应该给人什么感觉</h3>
+    <p>它未必要像产品官网那样“精致”，但应该有稳定气质、清晰内容和持续更新的耐心。</p>
+  </a>
   <a class="home-post-card" href="./posts/ai-architecture/overall-architecture-layered-design">
     <span class="home-post-card__tag">AI 助手总览</span>
     <h3>整体架构与分层设计</h3>
@@ -87,22 +98,22 @@ features:
   </a>
 </div>
 
-## 专题导航
+## 标签入口
 
 <div class="home-topic-grid">
-  <a class="home-topic-card" href="./posts/ai-architecture/overall-architecture-layered-design">
-    <span class="home-topic-card__kicker">SERIES 01</span>
-    <h3>终端 AI 助手架构</h3>
-    <p>适合按顺序阅读，从系统总览一路看到核心能力和基础设施设计。</p>
+  <a class="home-topic-card" href="./pages/tags/ai-engineering">
+    <span class="home-topic-card__kicker">TAG 01</span>
+    <h3>AI 工程</h3>
+    <p>偏方法、流程、协作和工程落地，适合想把 AI 真正接进开发流的人。</p>
   </a>
-  <a class="home-topic-card" href="./posts/architecture/frontend-architecture-design">
-    <span class="home-topic-card__kicker">SERIES 02</span>
-    <h3>前端架构与协作</h3>
-    <p>聚焦前端项目分层、AI 协作提示词和编码执行准则，偏工程落地。</p>
+  <a class="home-topic-card" href="./pages/tags/architecture">
+    <span class="home-topic-card__kicker">TAG 02</span>
+    <h3>架构</h3>
+    <p>从前端工程到系统分层，记录那些真正影响维护成本的设计判断。</p>
   </a>
-  <a class="home-topic-card" href="./posts/essay/city-night-riding">
-    <span class="home-topic-card__kicker">SERIES 03</span>
-    <h3>生活与随笔</h3>
-    <p>留一点不那么工具化的内容，把感受、节奏和观察也放进这个站点里。</p>
+  <a class="home-topic-card" href="./pages/tags/essay">
+    <span class="home-topic-card__kicker">TAG 03</span>
+    <h3>随笔</h3>
+    <p>技术之外保留一点呼吸感，把观察、节奏和写作意图也认真放进博客里。</p>
   </a>
 </div>

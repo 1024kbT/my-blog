@@ -2,6 +2,9 @@
 
 ## 2026
 
+- 2026-06-05 [我如何整理长期技术写作的素材池](/posts/engineering/how-i-organize-long-term-technical-writing)
+- 2026-06-05 [做一个可维护的前端博客系统，我会先守住什么](/posts/architecture/building-a-maintainable-frontend-blog-system)
+- 2026-06-05 [一个好的个人博客，应该给人什么感觉](/posts/essay/what-a-good-personal-blog-feels-like)
 - 2026-04-29 [整体架构与分层设计](/posts/ai-architecture/overall-architecture-layered-design)
 - 2026-04-29 [OpenCode 技术架构文档](/posts/ai-architecture/opencode-technical-architecture-overview)
 - 2026-04-29 [构建终端 AI 助手的核心功能清单](/posts/ai-architecture/core-feature-build-checklist)
