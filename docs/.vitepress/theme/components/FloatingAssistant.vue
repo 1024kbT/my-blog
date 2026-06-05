@@ -1,6 +1,12 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vitepress";
+import {
+  assistantArticles,
+  assistantCommands,
+  assistantIntents,
+  assistantQuickActions,
+} from "../assistant-knowledge";
 
 const router = useRouter();
 const route = useRoute();
@@ -10,123 +16,9 @@ const scrollerRef = ref(null);
 const assistantMode = ref("guide");
 const recentQueries = ref([]);
 const lastContextPath = ref("");
+const isMobile = ref(false);
 
 const RECENT_QUERY_KEY = "site-assistant-recent-queries";
-
-const quickActions = [
-  { label: "看归档", text: "带我去归档页" },
-  { label: "看标签", text: "打开标签页" },
-  { label: "看数据", text: "打开数据页" },
-  { label: "推荐文章", text: "推荐几篇文章" },
-];
-
-const articles = [
-  {
-    title: "整体架构与分层设计",
-    description: "从终端交互层到基础设施层，快速建立整个系统的认知地图。",
-    href: "/posts/ai-architecture/overall-architecture-layered-design",
-    keywords: ["ai", "助手", "架构", "分层", "系统设计"],
-    topic: "AI 助手总览",
-  },
-  {
-    title: "OpenCode 技术架构文档",
-    description: "从数据流、模块划分和系统定位出发，看一套终端 AI 助手如何组成整体。",
-    href: "/posts/ai-architecture/opencode-technical-architecture-overview",
-    keywords: ["opencode", "ai", "架构", "终端"],
-    topic: "AI 助手总览",
-  },
-  {
-    title: "我如何整理长期技术写作的素材池",
-    description: "从碎片记录到正式发布，给长期写作留一条可以持续复用的工作流。",
-    href: "/posts/engineering/how-i-organize-long-term-technical-writing",
-    keywords: ["写作", "素材", "文章", "博客", "内容"],
-    topic: "AI 工程",
-  },
-  {
-    title: "做一个可维护的前端博客系统，我会先守住什么",
-    description: "不是先卷花哨效果，而是先把内容结构、发布路径、分类方式和长期维护成本想清楚。",
-    href: "/posts/architecture/building-a-maintainable-frontend-blog-system",
-    keywords: ["前端", "博客", "架构", "维护", "系统"],
-    topic: "架构",
-  },
-  {
-    title: "前端项目架构设计指南",
-    description: "结合 Vue 2 + TypeScript 项目，整理分层、目录、类型与工程规范。",
-    href: "/posts/architecture/frontend-architecture-design",
-    keywords: ["前端", "typescript", "vue", "工程", "架构"],
-    topic: "架构",
-  },
-  {
-    title: "你不知道的 Claude Code：架构、治理与工程实践",
-    description: "从上下文、技能、工具、Hook 与子代理出发，梳理 AI 编程代理的工程方法。",
-    href: "/posts/ai/claude-code-architecture-governance-engineering-practice",
-    keywords: ["claude", "ai", "工程", "代理", "工具"],
-    topic: "AI 工程",
-  },
-  {
-    title: "一个好的个人博客，应该给人什么感觉",
-    description: "比起多酷，我更在意一个博客是否让人愿意停下来继续看。",
-    href: "/posts/essay/what-a-good-personal-blog-feels-like",
-    keywords: ["博客", "个人站", "随笔", "内容", "设计"],
-    topic: "随笔",
-  },
-];
-
-const knowledge = [
-  {
-    keywords: ["归档", "archives", "时间线"],
-    reply: "可以先去归档页，那里按时间整理了目前的文章。",
-    links: [{ text: "打开归档页", href: "/pages/archives" }],
-  },
-  {
-    keywords: ["标签", "分类", "topic"],
-    reply: "标签页更适合按主题找内容，现在已经整理成 AI 工程、架构、AI 助手、随笔几个入口。",
-    links: [{ text: "打开标签页", href: "/pages/tags" }],
-  },
-  {
-    keywords: ["数据", "统计", "浏览量"],
-    reply: "站点数据页可以看内容结构和一些基础统计，文章页底部还能看到访问量模块。",
-    links: [{ text: "打开数据页", href: "/pages/site-data" }],
-  },
-  {
-    keywords: ["ai", "助手", "架构"],
-    reply: "如果你想看系统设计路线，建议从 AI 助手总览专题开始。",
-    links: [
-      { text: "整体架构与分层设计", href: "/posts/ai-architecture/overall-architecture-layered-design" },
-      { text: "OpenCode 技术架构文档", href: "/posts/ai-architecture/opencode-technical-architecture-overview" },
-    ],
-  },
-  {
-    keywords: ["前端", "架构", "工程"],
-    reply: "前端和工程侧内容主要集中在架构与 AI 工程两个方向。",
-    links: [
-      { text: "前端项目架构设计指南", href: "/posts/architecture/frontend-architecture-design" },
-      { text: "做一个可维护的前端博客系统", href: "/posts/architecture/building-a-maintainable-frontend-blog-system" },
-    ],
-  },
-  {
-    keywords: ["推荐", "看看", "文章"],
-    reply: "我先给你三篇适合快速进入这个博客的文章。",
-    links: [
-      { text: "我如何整理长期技术写作的素材池", href: "/posts/engineering/how-i-organize-long-term-technical-writing" },
-      { text: "整体架构与分层设计", href: "/posts/ai-architecture/overall-architecture-layered-design" },
-      { text: "一个好的个人博客，应该给人什么感觉", href: "/posts/essay/what-a-good-personal-blog-feels-like" },
-    ],
-  },
-  {
-    keywords: ["你是谁", "你能做什么", "助手", "help"],
-    reply: "我现在更像一个站内助手：可以给你推荐文章、按主题找内容、带你去归档页和标签页，也能回答这个博客主要写什么。",
-    links: [
-      { text: "推荐文章", href: "/posts/engineering/how-i-organize-long-term-technical-writing" },
-      { text: "打开标签页", href: "/pages/tags" },
-    ],
-  },
-  {
-    keywords: ["模型", "llm", "gpt"],
-    reply: "我不是接了外部大模型的在线助手，现在是站内本地知识助手，重点是帮你更快找到内容，而不是泛化闲聊。",
-    links: [],
-  },
-];
 
 const messages = ref([
   {
@@ -137,7 +29,7 @@ const messages = ref([
 ]);
 
 const helperTitle = computed(() => (collapsed.value ? "展开助手" : "收起助手"));
-const currentArticle = computed(() => articles.find((item) => route.path.includes(item.href)));
+const currentArticle = computed(() => assistantArticles.find((item) => route.path.includes(item.href)));
 const contextualSuggestions = computed(() => {
   if (!currentArticle.value) {
     return [
@@ -146,7 +38,7 @@ const contextualSuggestions = computed(() => {
     ];
   }
 
-  return articles
+  return assistantArticles
     .filter((item) => item.topic === currentArticle.value.topic && item.href !== currentArticle.value.href)
     .slice(0, 2)
     .map((item) => ({
@@ -186,6 +78,9 @@ function pushAssistantReply(reply, links = []) {
 
 function navigateTo(href) {
   router.go(href);
+  if (isMobile.value) {
+    collapsed.value = true;
+  }
   pushAssistantReply("已经帮你打开对应页面。", []);
 }
 
@@ -199,10 +94,16 @@ function searchArticles(question) {
   const tokens = tokenize(question);
   if (!tokens.length) return [];
 
-  const scored = articles
+  const scored = assistantArticles
     .map((article) => {
       const haystack = `${article.title} ${article.description} ${article.keywords.join(" ")}`.toLowerCase();
-      const score = tokens.reduce((sum, token) => (haystack.includes(token) ? sum + 1 : sum), 0);
+      const titleScore = tokens.reduce((sum, token) => (article.title.toLowerCase().includes(token) ? sum + 3 : sum), 0);
+      const keywordScore = tokens.reduce(
+        (sum, token) => (article.keywords.some((keyword) => keyword.includes(token)) ? sum + 2 : sum),
+        0,
+      );
+      const textScore = tokens.reduce((sum, token) => (haystack.includes(token) ? sum + 1 : sum), 0);
+      const score = titleScore + keywordScore + textScore;
       return { article, score };
     })
     .filter((item) => item.score > 0)
@@ -217,11 +118,70 @@ function searchArticles(question) {
   }));
 }
 
+function handleCommand(question) {
+  const normalized = normalize(question);
+
+  if (normalized.startsWith("/goto")) {
+    const target = normalized.replace("/goto", "").trim();
+    const pageMap = {
+      archives: "/pages/archives",
+      tags: "/pages/tags",
+      data: "/pages/site-data",
+      home: "/",
+    };
+    const href = pageMap[target];
+    if (href) {
+      pushAssistantReply(`我帮你定位到 ${target} 页面。`, [{ text: `打开 ${target}`, href }]);
+      return true;
+    }
+    pushAssistantReply("`/goto` 目前支持：home、archives、tags、data。", []);
+    return true;
+  }
+
+  if (normalized.startsWith("/topic")) {
+    const topic = normalized.replace("/topic", "").trim();
+    const matched = assistantArticles
+      .filter((item) => normalize(item.topic).includes(topic) || item.keywords.some((keyword) => keyword.includes(topic)))
+      .slice(0, 4)
+      .map((item) => ({
+        text: item.title,
+        href: item.href,
+        description: item.description,
+        topic: item.topic,
+      }));
+
+    if (matched.length) {
+      pushAssistantReply(`我帮你找到了和“${topic}”最相关的一组文章。`, matched);
+    } else {
+      pushAssistantReply("这个专题我还没匹配到，你可以试试：架构、AI 助手、AI 工程、随笔。", []);
+    }
+    return true;
+  }
+
+  if (normalized.startsWith("/search")) {
+    const query = question.replace("/search", "").trim();
+    const results = searchArticles(query);
+    if (results.length) {
+      pushAssistantReply(`我按“${query}”帮你搜到这些文章。`, results);
+    } else {
+      pushAssistantReply(`暂时没搜到和“${query}”足够接近的文章。`, []);
+    }
+    return true;
+  }
+
+  return false;
+}
+
 function answerQuestion(question) {
   const normalized = normalize(question);
-  const matched = knowledge.find((entry) =>
+  const matched = assistantIntents.find((entry) =>
     entry.keywords.some((keyword) => normalized.includes(keyword)),
   );
+
+  if (handleCommand(question)) {
+    assistantMode.value = "search";
+    return;
+  }
 
   if (matched) {
     pushAssistantReply(matched.reply, matched.links);
@@ -281,11 +241,15 @@ function buildRouteContextReply() {
 
   pushAssistantReply(
     `你现在正在看《${currentArticle.value.title}》。如果想继续同主题阅读，我可以继续给你推荐 ${currentArticle.value.topic} 里的文章。`,
-    articles
+    assistantArticles
       .filter((item) => item.topic === currentArticle.value.topic && item.href !== currentArticle.value.href)
       .slice(0, 2)
       .map((item) => ({ text: item.title, href: item.href })),
   );
+}
+
+function syncViewportMode() {
+  isMobile.value = window.innerWidth <= 960;
 }
 
 onMounted(() => {
@@ -296,6 +260,8 @@ onMounted(() => {
     }
   } catch {}
 
+  syncViewportMode();
+  window.addEventListener("resize", syncViewportMode);
   window.addEventListener("keydown", handleShortcut);
 });
 
@@ -313,12 +279,21 @@ watch(
 );
 
 onBeforeUnmount(() => {
+  window.removeEventListener("resize", syncViewportMode);
   window.removeEventListener("keydown", handleShortcut);
 });
 </script>
 
 <template>
   <div class="floating-helper" :class="{ 'floating-helper--collapsed': collapsed }">
+    <button
+      v-if="!collapsed && isMobile"
+      type="button"
+      class="floating-helper__overlay"
+      aria-label="关闭助手"
+      @click="collapsed = true"
+    ></button>
+
     <button class="floating-helper__toggle" type="button" @click="toggleCollapsed">
       {{ helperTitle }}
     </button>
@@ -345,6 +320,7 @@ onBeforeUnmount(() => {
             }}
           </p>
         </div>
+        <button type="button" class="floating-helper__close" @click="collapsed = true">关闭</button>
       </div>
 
       <div ref="scrollerRef" class="floating-helper__messages">
@@ -374,7 +350,7 @@ onBeforeUnmount(() => {
 
       <div class="floating-helper__quick">
         <button
-          v-for="action in quickActions"
+          v-for="action in assistantQuickActions"
           :key="action.label"
           type="button"
           class="floating-helper__quick-btn"
@@ -391,6 +367,21 @@ onBeforeUnmount(() => {
         >
           {{ action.label }}
         </button>
+      </div>
+
+      <div class="floating-helper__commands">
+        <span class="floating-helper__recent-label">可用指令</span>
+        <div class="floating-helper__recent-list">
+          <button
+            v-for="command in assistantCommands"
+            :key="command.command"
+            type="button"
+            class="floating-helper__recent-btn floating-helper__recent-btn--command"
+            @click="submitMessage(command.command)"
+          >
+            {{ command.command }}
+          </button>
+        </div>
       </div>
 
       <div v-if="recentQueries.length" class="floating-helper__recent">
@@ -412,7 +403,7 @@ onBeforeUnmount(() => {
         <input
           v-model="input"
           type="text"
-          placeholder="问我：推荐文章 / 打开归档页 / AI 助手架构 / 这个博客写什么"
+          placeholder="问我：推荐文章 / /search AI 助手 / /goto tags"
           @keydown.enter.prevent="submitMessage()"
         />
         <button type="button" @click="submitMessage()">发送</button>
