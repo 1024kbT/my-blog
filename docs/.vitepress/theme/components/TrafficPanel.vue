@@ -1,5 +1,6 @@
 <script setup>
-import { computed, onMounted, onBeforeUnmount, reactive } from "vue";
+import { computed, onMounted, onBeforeUnmount, reactive, watch } from "vue";
+import { useRoute } from "vitepress";
 import { busuanziConfig } from "../integrations";
 
 const state = reactive({
@@ -11,8 +12,10 @@ const state = reactive({
 });
 
 const isConfigured = computed(() => Boolean(busuanziConfig.scriptUrl));
+const route = useRoute();
 
 let observer = null;
+let syncTimer = 0;
 
 function syncCounterValues() {
   state.sitePv = document.querySelector("#busuanzi_value_site_pv")?.textContent?.trim() || "";
@@ -21,9 +24,11 @@ function syncCounterValues() {
   state.loading = !(state.sitePv || state.siteUv || state.pagePv);
 }
 
-function ensureBusuanziScript() {
-  if (document.querySelector('script[data-busuanzi="true"]')) return;
+function clearBusuanziScript() {
+  document.querySelector('script[data-busuanzi="true"]')?.remove();
+}
 
+function ensureBusuanziScript() {
   const script = document.createElement("script");
   script.src = busuanziConfig.scriptUrl;
   script.async = true;
@@ -38,11 +43,24 @@ function ensureBusuanziScript() {
   document.body.appendChild(script);
 }
 
+function refreshBusuanzi() {
+  if (!isConfigured.value) return;
+
+  state.loading = true;
+  state.error = "";
+  clearBusuanziScript();
+  ensureBusuanziScript();
+
+  if (syncTimer) {
+    window.clearTimeout(syncTimer);
+  }
+
+  syncTimer = window.setTimeout(syncCounterValues, 1200);
+}
+
 onMounted(() => {
   if (!isConfigured.value) return;
-  state.loading = true;
-  ensureBusuanziScript();
-  syncCounterValues();
+  refreshBusuanzi();
 
   observer = new MutationObserver(() => {
     syncCounterValues();
@@ -55,9 +73,20 @@ onMounted(() => {
   });
 });
 
+watch(
+  () => route.path,
+  () => {
+    refreshBusuanzi();
+  },
+);
+
 onBeforeUnmount(() => {
   if (observer) {
     observer.disconnect();
+  }
+
+  if (syncTimer) {
+    window.clearTimeout(syncTimer);
   }
 });
 </script>

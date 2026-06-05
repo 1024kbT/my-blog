@@ -1,37 +1,45 @@
 <script setup>
 import { computed, onMounted, ref } from "vue";
-import { twikooConfig } from "../integrations";
+import { giscusConfig } from "../integrations";
 
 const containerRef = ref(null);
 const isConfigured = computed(
-  () => Boolean(twikooConfig.envId),
+  () =>
+    Boolean(
+      giscusConfig.repo &&
+        giscusConfig.repoId &&
+        giscusConfig.category &&
+        giscusConfig.categoryId,
+    ),
 );
 
-function getTwikooPath() {
-  return twikooConfig.path || window.location.pathname;
-}
-
-async function mountTwikoo() {
+function mountGiscus() {
   if (!isConfigured.value || !containerRef.value) return;
 
-  if (!window.twikoo) {
-    const module = await import("https://cdn.staticfile.org/twikoo/1.6.44/twikoo.all.min.js");
-    window.twikoo = module.default || module;
-  }
+  containerRef.value.innerHTML = "";
 
-  containerRef.value.innerHTML = '<div id="twikoo-thread"></div>';
+  const script = document.createElement("script");
+  script.src = "https://giscus.app/client.js";
+  script.async = true;
+  script.crossOrigin = "anonymous";
+  script.setAttribute("data-repo", giscusConfig.repo);
+  script.setAttribute("data-repo-id", giscusConfig.repoId);
+  script.setAttribute("data-category", giscusConfig.category);
+  script.setAttribute("data-category-id", giscusConfig.categoryId);
+  script.setAttribute("data-mapping", giscusConfig.mapping);
+  script.setAttribute("data-strict", giscusConfig.strict ? "1" : "0");
+  script.setAttribute("data-reactions-enabled", giscusConfig.reactionsEnabled ? "1" : "0");
+  script.setAttribute("data-emit-metadata", "0");
+  script.setAttribute("data-input-position", giscusConfig.inputPosition);
+  script.setAttribute("data-theme", "preferred_color_scheme");
+  script.setAttribute("data-lang", giscusConfig.lang);
+  script.setAttribute("data-loading", giscusConfig.loading);
 
-  await window.twikoo.init({
-    envId: twikooConfig.envId,
-    el: "#twikoo-thread",
-    region: twikooConfig.region || undefined,
-    path: getTwikooPath(),
-    lang: twikooConfig.lang,
-  });
+  containerRef.value.appendChild(script);
 }
 
 onMounted(() => {
-  mountTwikoo();
+  mountGiscus();
 });
 </script>
 
@@ -40,14 +48,14 @@ onMounted(() => {
     <div v-if="!isConfigured" class="vp-extension-card vp-extension-warn">
       <h2>评论区待配置</h2>
       <p>
-        先到 <code>docs/.vitepress/theme/integrations.js</code> 填写
-        <code>twikooConfig.envId</code>。如果你用的是腾讯云托管环境，也可以顺手补
-        <code>region</code>。
+        先到 <code>docs/.vitepress/theme/integrations.js</code> 填写 Giscus 的
+        <code>repo</code>、<code>repoId</code>、<code>category</code> 和
+        <code>categoryId</code>。
       </p>
     </div>
     <div v-else class="vp-extension-card">
       <h2>评论区</h2>
-      <p>评论区已切到 Twikoo，更适合国内访问环境，也更适合静态博客长期使用。</p>
+      <p>评论直接写入 GitHub Discussions，配置简单，也方便你继续沿用仓库体系。</p>
       <div ref="containerRef"></div>
     </div>
   </section>
