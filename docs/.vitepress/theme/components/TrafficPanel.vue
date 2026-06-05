@@ -1,53 +1,64 @@
 <script setup>
-import { computed, onMounted, reactive } from "vue";
-import { goatcounterConfig, trackedPages } from "../integrations";
+import { computed, onMounted, onBeforeUnmount, reactive } from "vue";
+import { busuanziConfig } from "../integrations";
 
 const state = reactive({
   loading: false,
   error: "",
-  counts: [],
+  sitePv: "",
+  siteUv: "",
+  pagePv: "",
 });
 
-const isConfigured = computed(() => Boolean(goatcounterConfig.code));
-const maxVisits = computed(() => state.counts.reduce((max, item) => Math.max(max, item.value || 0), 0));
+const isConfigured = computed(() => Boolean(busuanziConfig.scriptUrl));
 
-function getCounterBaseUrl() {
-  return `https://${goatcounterConfig.code}.goatcounter.com`;
+let observer = null;
+
+function syncCounterValues() {
+  state.sitePv = document.querySelector("#busuanzi_value_site_pv")?.textContent?.trim() || "";
+  state.siteUv = document.querySelector("#busuanzi_value_site_uv")?.textContent?.trim() || "";
+  state.pagePv = document.querySelector("#busuanzi_value_page_pv")?.textContent?.trim() || "";
+  state.loading = !(state.sitePv || state.siteUv || state.pagePv);
 }
 
-function getBarHeight(value) {
-  if (!maxVisits.value) return 12;
-  return Math.max(12, Math.round((value / maxVisits.value) * 100));
-}
+function ensureBusuanziScript() {
+  if (document.querySelector('script[data-busuanzi="true"]')) return;
 
-async function fetchCount(path) {
-  const response = await fetch(`${getCounterBaseUrl()}/counter/${encodeURIComponent(path)}.json`);
-  if (!response.ok) return 0;
-  const payload = await response.json();
-  return Number.parseInt(String(payload.count).replace(/,/g, ""), 10) || 0;
-}
-
-async function loadCounts() {
-  if (!isConfigured.value) return;
-  state.loading = true;
-  state.error = "";
-
-  try {
-    state.counts = await Promise.all(
-      trackedPages.map(async (item) => ({
-        ...item,
-        value: await fetchCount(item.path),
-      })),
-    );
-  } catch (error) {
-    state.error = error instanceof Error ? error.message : "统计读取失败";
-  } finally {
+  const script = document.createElement("script");
+  script.src = busuanziConfig.scriptUrl;
+  script.async = true;
+  script.setAttribute("data-busuanzi", "true");
+  script.onload = () => {
+    window.setTimeout(syncCounterValues, 600);
+  };
+  script.onerror = () => {
+    state.error = "不蒜子脚本加载失败";
     state.loading = false;
-  }
+  };
+  document.body.appendChild(script);
 }
 
 onMounted(() => {
-  loadCounts();
+  if (!isConfigured.value) return;
+  state.loading = true;
+  ensureBusuanziScript();
+  syncCounterValues();
+
+  observer = new MutationObserver(() => {
+    syncCounterValues();
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+    characterData: true,
+  });
+});
+
+onBeforeUnmount(() => {
+  if (observer) {
+    observer.disconnect();
+  }
 });
 </script>
 
@@ -56,29 +67,40 @@ onMounted(() => {
     <div v-if="!isConfigured" class="vp-extension-card vp-extension-warn">
       <h2>访问统计待配置</h2>
       <p>
-        到 <code>docs/.vitepress/theme/integrations.js</code> 填写
-        <code>goatcounterConfig.code</code>，并在 GoatCounter 后台开启公开访问计数。
+        到 <code>docs/.vitepress/theme/integrations.js</code> 检查
+        <code>busuanziConfig.scriptUrl</code> 是否可用。
       </p>
     </div>
     <div v-else class="vp-extension-card">
       <div class="vp-extension-head">
         <div>
           <h2>访问统计</h2>
-          <p>用 GoatCounter 记录访问次数，再直接在文章页底部做一层轻量图表。</p>
+          <p>已切到不蒜子统计，优先兼顾国内访问可用性。这里会展示站点访问量、访客量和当前页阅读量。</p>
         </div>
         <span class="vp-extension-note">{{ state.loading ? "同步中..." : "已同步" }}</span>
       </div>
 
       <div v-if="state.error" class="vp-extension-error">{{ state.error }}</div>
 
-      <div class="vp-chart">
-        <div v-for="item in state.counts" :key="item.path" class="vp-chart-col">
-          <span class="vp-chart-value">{{ item.value }}</span>
-          <div class="vp-chart-rail">
-            <div class="vp-chart-bar" :style="{ height: `${getBarHeight(item.value)}%` }"></div>
-          </div>
-          <span class="vp-chart-label">{{ item.label }}</span>
+      <div class="domestic-stats">
+        <div class="domestic-stats__card">
+          <span class="domestic-stats__label">站点总访问量</span>
+          <strong>{{ state.sitePv || "加载中" }}</strong>
         </div>
+        <div class="domestic-stats__card">
+          <span class="domestic-stats__label">站点总访客数</span>
+          <strong>{{ state.siteUv || "加载中" }}</strong>
+        </div>
+        <div class="domestic-stats__card">
+          <span class="domestic-stats__label">当前页阅读量</span>
+          <strong>{{ state.pagePv || "加载中" }}</strong>
+        </div>
+      </div>
+
+      <div class="busuanzi-hidden" aria-hidden="true">
+        <span id="busuanzi_container_site_pv">本站总访问量 <span id="busuanzi_value_site_pv"></span></span>
+        <span id="busuanzi_container_site_uv">本站总访客数 <span id="busuanzi_value_site_uv"></span></span>
+        <span id="busuanzi_container_page_pv">本页阅读量 <span id="busuanzi_value_page_pv"></span></span>
       </div>
     </div>
   </section>

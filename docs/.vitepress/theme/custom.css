@@ -330,6 +330,87 @@
   line-height: 1.8;
 }
 
+.site-overview-panel {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.site-overview-card,
+.site-overview-stat,
+.site-overview-links {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent),
+    rgba(255, 255, 255, 0.02);
+}
+
+.site-overview-card {
+  padding: 18px;
+}
+
+.site-overview-card__kicker {
+  display: inline-flex;
+  margin-bottom: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--vp-c-brand-1);
+}
+
+.site-overview-card h2 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.site-overview-card p {
+  margin: 0;
+  color: var(--vp-c-text-2);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.site-overview-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.site-overview-stat {
+  padding: 14px 10px;
+  text-align: center;
+}
+
+.site-overview-stat strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 18px;
+}
+
+.site-overview-stat span {
+  font-size: 12px;
+  color: var(--vp-c-text-3);
+}
+
+.site-overview-links {
+  display: grid;
+  padding: 8px;
+}
+
+.site-overview-links a {
+  display: block;
+  padding: 9px 10px;
+  border-radius: 10px;
+  color: var(--vp-c-text-2);
+  text-decoration: none;
+}
+
+.site-overview-links a:hover {
+  background: rgba(182, 123, 77, 0.1);
+  color: var(--vp-c-brand-1);
+}
+
 .data-dashboard {
   display: grid;
   gap: 22px;
@@ -479,6 +560,39 @@
   color: var(--vp-c-text-3);
 }
 
+.domestic-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.domestic-stats__card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.domestic-stats__label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: var(--vp-c-text-3);
+}
+
+.domestic-stats__card strong {
+  font-size: 24px;
+}
+
+.busuanzi-hidden {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .floating-helper {
   position: fixed;
   right: 20px;
@@ -591,7 +705,6 @@
 }
 
 @media (max-width: 960px) {
-  .home-overview,
   .floating-helper {
     right: 12px;
     bottom: 12px;
@@ -601,6 +714,7 @@
   .data-grid,
   .data-columns,
   .tag-index,
+  .domestic-stats,
   .home-tech-band__grid,
   .home-post-grid,
   .home-topic-grid {

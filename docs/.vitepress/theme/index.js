@@ -3,12 +3,14 @@ import DefaultTheme from "vitepress/theme";
 import "./custom.css";
 import CommentsPanel from "./components/CommentsPanel.vue";
 import FloatingAssistant from "./components/FloatingAssistant.vue";
+import SiteOverviewPanel from "./components/SiteOverviewPanel.vue";
 import TrafficPanel from "./components/TrafficPanel.vue";
 
 export default {
   extends: DefaultTheme,
   Layout() {
     return h(DefaultTheme.Layout, null, {
+      "aside-outline-before": () => h(SiteOverviewPanel),
       "doc-after": () => [h(TrafficPanel), h(CommentsPanel)],
       "layout-bottom": () => h(FloatingAssistant),
     });

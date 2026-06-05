@@ -1,7 +1,7 @@
 // 统一放第三方集成参数，后面只需要改这里。
-export const goatcounterConfig = {
-  // 例如：my-blog-stats；对应 https://my-blog-stats.goatcounter.com
-  code: "lwq",
+export const busuanziConfig = {
+  // 使用国内常见的不蒜子计数脚本。
+  scriptUrl: "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",
 };
 
 export const trackedPages = [
@@ -12,15 +12,12 @@ export const trackedPages = [
   { label: "迁移", path: "/posts/dev/from-showcase-to-content-system" },
 ];
 
-export const giscusConfig = {
-  repo: "1024kbt/my-blog",
-  repoId: "R_kgDOSPrnUw",
-  category: "Announcements",
-  categoryId: "DIC_kwDOSPrnU84C786k",
-  mapping: "pathname",
-  strict: false,
-  reactionsEnabled: true,
-  inputPosition: "top",
+export const twikooConfig = {
+  // 例如：https://your-service.netlify.app/.netlify/functions/twikoo
+  envId: "",
+  // 例如：ap-shanghai；如果你使用腾讯云环境可以按需填写。
+  region: "",
+  path: "",
   lang: "zh-CN",
   loading: "lazy",
 };

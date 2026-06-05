@@ -97,7 +97,7 @@ export default defineConfig({
       ],
     },
     footer: {
-      message: "忘西的博客 · 写给长期内容的个人博客",
+      message: "忘西的博客 · 长期写作 · 内容归档 · GitHub Pages",
       copyright: "Copyright © 2026-present 1024kbT",
     },
     outline: {
