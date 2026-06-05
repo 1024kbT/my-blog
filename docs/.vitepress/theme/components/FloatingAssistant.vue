@@ -6,12 +6,58 @@ const router = useRouter();
 const collapsed = ref(false);
 const input = ref("");
 const scrollerRef = ref(null);
+const assistantMode = ref("guide");
 
 const quickActions = [
   { label: "看归档", text: "带我去归档页" },
   { label: "看标签", text: "打开标签页" },
   { label: "看数据", text: "打开数据页" },
   { label: "推荐文章", text: "推荐几篇文章" },
+];
+
+const articles = [
+  {
+    title: "整体架构与分层设计",
+    description: "从终端交互层到基础设施层，快速建立整个系统的认知地图。",
+    href: "/posts/ai-architecture/overall-architecture-layered-design",
+    keywords: ["ai", "助手", "架构", "分层", "系统设计"],
+  },
+  {
+    title: "OpenCode 技术架构文档",
+    description: "从数据流、模块划分和系统定位出发，看一套终端 AI 助手如何组成整体。",
+    href: "/posts/ai-architecture/opencode-technical-architecture-overview",
+    keywords: ["opencode", "ai", "架构", "终端"],
+  },
+  {
+    title: "我如何整理长期技术写作的素材池",
+    description: "从碎片记录到正式发布，给长期写作留一条可以持续复用的工作流。",
+    href: "/posts/engineering/how-i-organize-long-term-technical-writing",
+    keywords: ["写作", "素材", "文章", "博客", "内容"],
+  },
+  {
+    title: "做一个可维护的前端博客系统，我会先守住什么",
+    description: "不是先卷花哨效果，而是先把内容结构、发布路径、分类方式和长期维护成本想清楚。",
+    href: "/posts/architecture/building-a-maintainable-frontend-blog-system",
+    keywords: ["前端", "博客", "架构", "维护", "系统"],
+  },
+  {
+    title: "前端项目架构设计指南",
+    description: "结合 Vue 2 + TypeScript 项目，整理分层、目录、类型与工程规范。",
+    href: "/posts/architecture/frontend-architecture-design",
+    keywords: ["前端", "typescript", "vue", "工程", "架构"],
+  },
+  {
+    title: "你不知道的 Claude Code：架构、治理与工程实践",
+    description: "从上下文、技能、工具、Hook 与子代理出发，梳理 AI 编程代理的工程方法。",
+    href: "/posts/ai/claude-code-architecture-governance-engineering-practice",
+    keywords: ["claude", "ai", "工程", "代理", "工具"],
+  },
+  {
+    title: "一个好的个人博客，应该给人什么感觉",
+    description: "比起多酷，我更在意一个博客是否让人愿意停下来继续看。",
+    href: "/posts/essay/what-a-good-personal-blog-feels-like",
+    keywords: ["博客", "个人站", "随笔", "内容", "设计"],
+  },
 ];
 
 const knowledge = [
@@ -55,6 +101,19 @@ const knowledge = [
       { text: "一个好的个人博客，应该给人什么感觉", href: "/posts/essay/what-a-good-personal-blog-feels-like" },
     ],
   },
+  {
+    keywords: ["你是谁", "你能做什么", "助手", "help"],
+    reply: "我现在更像一个站内助手：可以给你推荐文章、按主题找内容、带你去归档页和标签页，也能回答这个博客主要写什么。",
+    links: [
+      { text: "推荐文章", href: "/posts/engineering/how-i-organize-long-term-technical-writing" },
+      { text: "打开标签页", href: "/pages/tags" },
+    ],
+  },
+  {
+    keywords: ["模型", "llm", "gpt"],
+    reply: "我不是接了外部大模型的在线助手，现在是站内本地知识助手，重点是帮你更快找到内容，而不是泛化闲聊。",
+    links: [],
+  },
 ];
 
 const messages = ref([
@@ -69,6 +128,13 @@ const helperTitle = computed(() => (collapsed.value ? "展开助手" : "收起�
 
 function normalize(text) {
   return text.trim().toLowerCase();
+}
+
+function tokenize(text) {
+  return normalize(text)
+    .replace(/[^\u4e00-\u9fa5a-z0-9\s]/g, " ")
+    .split(/\s+/)
+    .filter(Boolean);
 }
 
 function scrollToBottom() {
@@ -94,6 +160,26 @@ function navigateTo(href) {
   pushAssistantReply("已经帮你打开对应页面。", []);
 }
 
+function searchArticles(question) {
+  const tokens = tokenize(question);
+  if (!tokens.length) return [];
+
+  const scored = articles
+    .map((article) => {
+      const haystack = `${article.title} ${article.description} ${article.keywords.join(" ")}`.toLowerCase();
+      const score = tokens.reduce((sum, token) => (haystack.includes(token) ? sum + 1 : sum), 0);
+      return { article, score };
+    })
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 4);
+
+  return scored.map((item) => ({
+    text: item.article.title,
+    href: item.article.href,
+  }));
+}
+
 function answerQuestion(question) {
   const normalized = normalize(question);
   const matched = knowledge.find((entry) =>
@@ -105,8 +191,15 @@ function answerQuestion(question) {
     return;
   }
 
+  const searchResults = searchArticles(question);
+  if (searchResults.length) {
+    assistantMode.value = "search";
+    pushAssistantReply("我按你的问题在站内帮你找了几篇最接近的文章，可以先从这些开始看。", searchResults);
+    return;
+  }
+
   pushAssistantReply(
-    "我暂时还听不太懂这个问题，不过你可以试试问我：推荐文章、打开归档页、打开标签页、打开数据页、AI 助手架构、前端架构。",
+    "我暂时还没理解这个问题。你可以直接问我：推荐文章、打开归档页、打开标签页、打开数据页、AI 助手架构、前端架构、这个博客主要写什么。",
     [],
   );
 }
@@ -149,7 +242,7 @@ function toggleCollapsed() {
         </div>
         <div>
           <strong>站点助手</strong>
-          <p>给你带路、推荐文章、快速跳转</p>
+          <p>{{ assistantMode === "search" ? "站内检索 / 内容带路" : "带路、推荐文章、快速跳转" }}</p>
         </div>
       </div>
 
