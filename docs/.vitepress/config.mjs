@@ -6,7 +6,8 @@ export default defineConfig({
   title: "忘西的博客",
   description: "一个基于 VitePress 的个人博客",
   base: "/my-blog/",
-  cleanUrls: true,
+  // GitHub Pages 没有无后缀路由重写能力，这里关闭 cleanUrls，避免静态访问时出现 404。
+  cleanUrls: false,
   lastUpdated: true,
   themeConfig: {
     logo: "/logo.svg",
@@ -33,6 +34,8 @@ export default defineConfig({
           text: "技术",
           collapsed: false,
           items: [
+            // 把偏实操的账号与订阅文章也收进技术分组，方便从首页和侧边栏同时进入。
+            { text: "土区账号注册与订阅教程", link: "/posts/dev/turkey-region-registration-playbook" },
             { text: "把个人博客从展示页收成内容系统", link: "/posts/dev/from-showcase-to-content-system" },
             { text: "GitHub Pages + VitePress 的部署踩坑记录", link: "/posts/dev/github-pages-vitepress-notes" },
           ],

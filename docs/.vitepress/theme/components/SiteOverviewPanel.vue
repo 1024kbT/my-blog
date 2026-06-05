@@ -24,9 +24,10 @@
     </div>
 
     <div class="site-overview-links">
-      <a href="/my-blog/pages/archives">归档</a>
-      <a href="/my-blog/pages/tags">标签</a>
-      <a href="/my-blog/pages/site-data">数据页</a>
+      <!-- 这里显式带上 .html，避免 GitHub Pages 直接点击时落到无后缀地址。 -->
+      <a href="/my-blog/pages/archives.html">归档</a>
+      <a href="/my-blog/pages/tags.html">标签</a>
+      <a href="/my-blog/pages/site-data.html">数据页</a>
     </div>
   </section>
 </template>

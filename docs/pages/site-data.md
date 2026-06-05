@@ -57,9 +57,9 @@
     <section class="data-card">
       <h2>近期新增</h2>
       <ul>
-        <li><a href="/posts/engineering/how-i-organize-long-term-technical-writing">我如何整理长期技术写作的素材池</a></li>
-        <li><a href="/posts/architecture/building-a-maintainable-frontend-blog-system">做一个可维护的前端博客系统，我会先守住什么</a></li>
-        <li><a href="/posts/essay/what-a-good-personal-blog-feels-like">一个好的个人博客，应该给人什么感觉</a></li>
+        <li><a href="../posts/engineering/how-i-organize-long-term-technical-writing.html">我如何整理长期技术写作的素材池</a></li>
+        <li><a href="../posts/architecture/building-a-maintainable-frontend-blog-system.html">做一个可维护的前端博客系统，我会先守住什么</a></li>
+        <li><a href="../posts/essay/what-a-good-personal-blog-feels-like.html">一个好的个人博客，应该给人什么感觉</a></li>
       </ul>
     </section>
   </div>
