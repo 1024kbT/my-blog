@@ -593,6 +593,39 @@
   pointer-events: none;
 }
 
+.live2d-widget-host {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 35;
+  pointer-events: none;
+}
+
+.live2d-widget-placeholder {
+  width: 240px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent),
+    rgba(17, 20, 27, 0.9);
+  color: var(--vp-c-text-2);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(10px);
+}
+
+.live2d-widget-placeholder strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--vp-c-text-1);
+}
+
+.live2d-widget-placeholder p {
+  margin: 0;
+  line-height: 1.7;
+  font-size: 13px;
+}
+
 .floating-helper {
   position: fixed;
   right: 20px;
@@ -880,6 +913,16 @@
 }
 
 @media (max-width: 960px) {
+  .live2d-widget-host {
+    left: 12px;
+    bottom: 12px;
+  }
+
+  .live2d-widget-placeholder {
+    width: 180px;
+    padding: 12px;
+  }
+
   .floating-helper {
     right: 12px;
     bottom: 12px;
