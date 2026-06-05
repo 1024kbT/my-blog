@@ -1,12 +1,17 @@
 <script setup>
-import { computed, nextTick, ref } from "vue";
-import { useRouter } from "vitepress";
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
+import { useRoute, useRouter } from "vitepress";
 
 const router = useRouter();
+const route = useRoute();
 const collapsed = ref(false);
 const input = ref("");
 const scrollerRef = ref(null);
 const assistantMode = ref("guide");
+const recentQueries = ref([]);
+const lastContextPath = ref("");
+
+const RECENT_QUERY_KEY = "site-assistant-recent-queries";
 
 const quickActions = [
   { label: "看归档", text: "带我去归档页" },
@@ -21,42 +26,49 @@ const articles = [
     description: "从终端交互层到基础设施层，快速建立整个系统的认知地图。",
     href: "/posts/ai-architecture/overall-architecture-layered-design",
     keywords: ["ai", "助手", "架构", "分层", "系统设计"],
+    topic: "AI 助手总览",
   },
   {
     title: "OpenCode 技术架构文档",
     description: "从数据流、模块划分和系统定位出发，看一套终端 AI 助手如何组成整体。",
     href: "/posts/ai-architecture/opencode-technical-architecture-overview",
     keywords: ["opencode", "ai", "架构", "终端"],
+    topic: "AI 助手总览",
   },
   {
     title: "我如何整理长期技术写作的素材池",
     description: "从碎片记录到正式发布，给长期写作留一条可以持续复用的工作流。",
     href: "/posts/engineering/how-i-organize-long-term-technical-writing",
     keywords: ["写作", "素材", "文章", "博客", "内容"],
+    topic: "AI 工程",
   },
   {
     title: "做一个可维护的前端博客系统，我会先守住什么",
     description: "不是先卷花哨效果，而是先把内容结构、发布路径、分类方式和长期维护成本想清楚。",
     href: "/posts/architecture/building-a-maintainable-frontend-blog-system",
     keywords: ["前端", "博客", "架构", "维护", "系统"],
+    topic: "架构",
   },
   {
     title: "前端项目架构设计指南",
     description: "结合 Vue 2 + TypeScript 项目，整理分层、目录、类型与工程规范。",
     href: "/posts/architecture/frontend-architecture-design",
     keywords: ["前端", "typescript", "vue", "工程", "架构"],
+    topic: "架构",
   },
   {
     title: "你不知道的 Claude Code：架构、治理与工程实践",
     description: "从上下文、技能、工具、Hook 与子代理出发，梳理 AI 编程代理的工程方法。",
     href: "/posts/ai/claude-code-architecture-governance-engineering-practice",
     keywords: ["claude", "ai", "工程", "代理", "工具"],
+    topic: "AI 工程",
   },
   {
     title: "一个好的个人博客，应该给人什么感觉",
     description: "比起多酷，我更在意一个博客是否让人愿意停下来继续看。",
     href: "/posts/essay/what-a-good-personal-blog-feels-like",
     keywords: ["博客", "个人站", "随笔", "内容", "设计"],
+    topic: "随笔",
   },
 ];
 
@@ -125,6 +137,23 @@ const messages = ref([
 ]);
 
 const helperTitle = computed(() => (collapsed.value ? "展开助手" : "收起助手"));
+const currentArticle = computed(() => articles.find((item) => route.path.includes(item.href)));
+const contextualSuggestions = computed(() => {
+  if (!currentArticle.value) {
+    return [
+      { label: "推荐文章", text: "推荐几篇文章" },
+      { label: "站点写什么", text: "这个博客主要写什么" },
+    ];
+  }
+
+  return articles
+    .filter((item) => item.topic === currentArticle.value.topic && item.href !== currentArticle.value.href)
+    .slice(0, 2)
+    .map((item) => ({
+      label: `继续看：${item.title.slice(0, 8)}${item.title.length > 8 ? "..." : ""}`,
+      text: item.title,
+    }));
+});
 
 function normalize(text) {
   return text.trim().toLowerCase();
@@ -160,6 +189,12 @@ function navigateTo(href) {
   pushAssistantReply("已经帮你打开对应页面。", []);
 }
 
+function saveRecentQuery(query) {
+  const nextQueries = [query, ...recentQueries.value.filter((item) => item !== query)].slice(0, 6);
+  recentQueries.value = nextQueries;
+  window.localStorage.setItem(RECENT_QUERY_KEY, JSON.stringify(nextQueries));
+}
+
 function searchArticles(question) {
   const tokens = tokenize(question);
   if (!tokens.length) return [];
@@ -177,6 +212,8 @@ function searchArticles(question) {
   return scored.map((item) => ({
     text: item.article.title,
     href: item.article.href,
+    description: item.article.description,
+    topic: item.article.topic,
   }));
 }
 
@@ -208,12 +245,14 @@ function submitMessage(text = input.value) {
   const content = text.trim();
   if (!content) return;
 
+  assistantMode.value = "guide";
   messages.value.push({
     role: "user",
     text: content,
     links: [],
   });
 
+  saveRecentQuery(content);
   input.value = "";
   scrollToBottom();
   answerQuestion(content);
@@ -222,6 +261,60 @@ function submitMessage(text = input.value) {
 function toggleCollapsed() {
   collapsed.value = !collapsed.value;
 }
+
+function handleShortcut(event) {
+  if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+    event.preventDefault();
+    collapsed.value = false;
+    nextTick(() => {
+      document.querySelector(".floating-helper__composer input")?.focus();
+    });
+  }
+
+  if (event.key === "Escape") {
+    collapsed.value = true;
+  }
+}
+
+function buildRouteContextReply() {
+  if (!currentArticle.value) return;
+
+  pushAssistantReply(
+    `你现在正在看《${currentArticle.value.title}》。如果想继续同主题阅读，我可以继续给你推荐 ${currentArticle.value.topic} 里的文章。`,
+    articles
+      .filter((item) => item.topic === currentArticle.value.topic && item.href !== currentArticle.value.href)
+      .slice(0, 2)
+      .map((item) => ({ text: item.title, href: item.href })),
+  );
+}
+
+onMounted(() => {
+  try {
+    const stored = JSON.parse(window.localStorage.getItem(RECENT_QUERY_KEY) || "[]");
+    if (Array.isArray(stored)) {
+      recentQueries.value = stored.slice(0, 6);
+    }
+  } catch {}
+
+  window.addEventListener("keydown", handleShortcut);
+});
+
+watch(
+  () => route.path,
+  (path) => {
+    if (path === lastContextPath.value) return;
+    lastContextPath.value = path;
+
+    if (currentArticle.value) {
+      assistantMode.value = "context";
+      buildRouteContextReply();
+    }
+  },
+);
+
+onBeforeUnmount(() => {
+  window.removeEventListener("keydown", handleShortcut);
+});
 </script>
 
 <template>
@@ -242,7 +335,15 @@ function toggleCollapsed() {
         </div>
         <div>
           <strong>站点助手</strong>
-          <p>{{ assistantMode === "search" ? "站内检索 / 内容带路" : "带路、推荐文章、快速跳转" }}</p>
+          <p>
+            {{
+              assistantMode === "search"
+                ? "站内检索 / 内容带路"
+                : assistantMode === "context"
+                  ? "当前页面相关推荐"
+                  : "带路、推荐文章、快速跳转"
+            }}
+          </p>
         </div>
       </div>
 
@@ -262,7 +363,10 @@ function toggleCollapsed() {
               class="floating-helper__link"
               @click="navigateTo(link.href)"
             >
-              {{ link.text }}
+              <span class="floating-helper__link-title">{{ link.text }}</span>
+              <small v-if="link.topic || link.description" class="floating-helper__link-meta">
+                {{ link.topic || "站内文章" }}{{ link.description ? ` · ${link.description}` : "" }}
+              </small>
             </button>
           </div>
         </div>
@@ -278,13 +382,37 @@ function toggleCollapsed() {
         >
           {{ action.label }}
         </button>
+        <button
+          v-for="action in contextualSuggestions"
+          :key="action.label"
+          type="button"
+          class="floating-helper__quick-btn floating-helper__quick-btn--soft"
+          @click="submitMessage(action.text)"
+        >
+          {{ action.label }}
+        </button>
+      </div>
+
+      <div v-if="recentQueries.length" class="floating-helper__recent">
+        <span class="floating-helper__recent-label">最近查询</span>
+        <div class="floating-helper__recent-list">
+          <button
+            v-for="query in recentQueries"
+            :key="query"
+            type="button"
+            class="floating-helper__recent-btn"
+            @click="submitMessage(query)"
+          >
+            {{ query }}
+          </button>
+        </div>
       </div>
 
       <div class="floating-helper__composer">
         <input
           v-model="input"
           type="text"
-          placeholder="问我：推荐文章 / 打开归档页 / AI 助手架构"
+          placeholder="问我：推荐文章 / 打开归档页 / AI 助手架构 / 这个博客写什么"
           @keydown.enter.prevent="submitMessage()"
         />
         <button type="button" @click="submitMessage()">发送</button>
