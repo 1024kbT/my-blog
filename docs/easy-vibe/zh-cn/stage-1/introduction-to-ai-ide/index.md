@@ -775,7 +775,7 @@ AI 很认真地给了你一段代码，你也老老实实地复制进去了，�
       <span style="font-size: 12px; color: #909399">看到不懂的计算机名词时，来这里快速查含义，推荐通读一遍。</span>
     </el-col>
     <el-col :span="12">
-      <a href="/easy-vibe/zh-cn/appendix/2-development-tools/ide-basics" style="text-decoration: none; color: inherit;"><b>附录二：Visual Studio Code 菜单栏解析</b></a><br/>
+      <a href="../appendix/2-development-tools/ide-basics" style="text-decoration: none; color: inherit;"><b>附录二：Visual Studio Code 菜单栏解析</b></a><br/>
       <span style="font-size: 12px; color: #909399">不知道 AI IDE 的界面有什么用的时候，拿以下内容和 AI 对话进行查阅，或者直接查看。</span>
     </el-col>
   </el-row>

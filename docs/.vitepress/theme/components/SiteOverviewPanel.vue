@@ -1,3 +1,7 @@
+<script setup>
+import { withBase } from "vitepress";
+</script>
+
 <template>
   <section class="site-overview-panel">
     <div class="site-overview-card">
@@ -25,9 +29,9 @@
 
     <div class="site-overview-links">
       <!-- 这里显式带上 .html，避免 GitHub Pages 直接点击时落到无后缀地址。 -->
-      <a href="/my-blog/pages/archives.html">归档</a>
-      <a href="/my-blog/pages/tags.html">标签</a>
-      <a href="/my-blog/pages/site-data.html">数据页</a>
+      <a :href="withBase('/pages/archives.html')">归档</a>
+      <a :href="withBase('/pages/tags.html')">标签</a>
+      <a :href="withBase('/pages/site-data.html')">数据页</a>
     </div>
   </section>
 </template>
