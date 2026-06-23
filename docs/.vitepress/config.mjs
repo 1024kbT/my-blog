@@ -21,6 +21,57 @@ export default defineConfig({
     },
     socialLinks: [{ icon: "github", link: "https://github.com/1024kbT/my-blog" }],
     sidebar: {
+      "/posts/engineering/": [
+        {
+          text: "新手入门",
+          collapsed: false,
+          items: [
+            { text: "学习地图", link: "/posts/engineering/ai-building-learning-map" },
+            { text: "AI 时代，会说话就会编程", link: "/posts/engineering/ai-era-conversational-programming" },
+          ],
+        },
+        {
+          text: "产品原型实战",
+          collapsed: false,
+          items: [
+            { text: "学会 AI 编程工具", link: "/posts/engineering/ai-tools-for-builders" },
+            { text: "找到好点子", link: "/posts/engineering/how-to-find-good-ai-product-ideas" },
+            { text: "搭建产品原型", link: "/posts/engineering/building-ai-product-prototype" },
+            { text: "接入 AI 能力", link: "/posts/engineering/integrating-ai-capabilities-into-product" },
+            { text: "完整项目实战", link: "/posts/engineering/complete-ai-project-practice" },
+          ],
+        },
+        {
+          text: "附录：业务思维",
+          collapsed: false,
+          items: [
+            { text: "产品思维与方案设计", link: "/posts/engineering/product-thinking-and-solution-design" },
+            { text: "AI 行业应用场景参考（B端）", link: "/posts/engineering/b2b-ai-scenario-reference" },
+            { text: "AI 消费场景灵感参考（C端）", link: "/posts/engineering/c2c-ai-scenario-reference" },
+          ],
+        },
+        {
+          text: "附录：用户研究与需求验证",
+          collapsed: false,
+          items: [
+            { text: "从哪里找点子：3 种最适合新手的参考来源", link: "/posts/engineering/where-to-find-good-ideas" },
+            { text: "双钻模型：先做对的事，再把事做对", link: "/posts/engineering/double-diamond-for-ai-validation" },
+            { text: "用 Jobs to Be Done 找到用户真正想完成的事", link: "/posts/engineering/jobs-to-be-done-for-ai-products" },
+          ],
+        },
+        {
+          text: "延伸阅读",
+          collapsed: true,
+          items: [
+            { text: "零基础入门：从会用到会搭一个 AI 小工具", link: "/posts/engineering/ai-building-stage-1-foundation" },
+            { text: "初中级进阶：把 AI Demo 做成真正可用的小产品", link: "/posts/engineering/ai-building-stage-2-productization" },
+            { text: "高级开发：从功能实现走向系统设计", link: "/posts/engineering/ai-building-stage-3-advanced-systems" },
+            { text: "产品实战：从点子到第一个 AI 产品 Demo", link: "/posts/engineering/ai-building-product-practice" },
+            { text: "业务思维：做 AI 应用时到底该想什么", link: "/posts/engineering/ai-building-business-thinking" },
+            { text: "附录：AI 应用开发的资料、练习与项目清单", link: "/posts/engineering/ai-building-appendix-resources" },
+          ],
+        },
+      ],
       "/posts/": [
         {
           text: "随笔",
@@ -53,30 +104,6 @@ export default defineConfig({
             {
               text: "AI 产品与应用开发学习地图",
               link: "/posts/engineering/ai-building-learning-map",
-            },
-            {
-              text: "零基础入门：从会用到会搭一个 AI 小工具",
-              link: "/posts/engineering/ai-building-stage-1-foundation",
-            },
-            {
-              text: "初中级进阶：把 AI Demo 做成真正可用的小产品",
-              link: "/posts/engineering/ai-building-stage-2-productization",
-            },
-            {
-              text: "高级开发：从功能实现走向系统设计",
-              link: "/posts/engineering/ai-building-stage-3-advanced-systems",
-            },
-            {
-              text: "产品实战：从点子到第一个 AI 产品 Demo",
-              link: "/posts/engineering/ai-building-product-practice",
-            },
-            {
-              text: "业务思维：做 AI 应用时到底该想什么",
-              link: "/posts/engineering/ai-building-business-thinking",
-            },
-            {
-              text: "附录：AI 应用开发的资料、练习与项目清单",
-              link: "/posts/engineering/ai-building-appendix-resources",
             },
             {
               text: "你不知道的 Claude Code：架构、治理与工程实践",

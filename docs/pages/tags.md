@@ -3,7 +3,7 @@
 <div class="tag-index">
   <a class="tag-index__card" href="./tags/ai-engineering.html">
     <h2>AI 工程</h2>
-    <p>13 篇文章，聚焦学习路线、产品实战、业务思维、附录资源与工程习惯。</p>
+    <p>13 篇主线文章，按新手入门、产品原型实战、业务思维和用户研究分模块收纳。</p>
   </a>
   <a class="tag-index__card" href="./tags/architecture.html">
     <h2>架构</h2>
