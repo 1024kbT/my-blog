@@ -1,5 +1,148 @@
 import { defineConfig } from "vitepress";
 
+const easyVibeSidebar = [
+  {
+    text: "总览",
+    collapsed: false,
+    items: [
+      { text: "Easy-Vibe 首页", link: "/easy-vibe/zh-cn/" },
+      { text: "Stage 1 学习地图", link: "/easy-vibe/zh-cn/stage-1/learning-map/" },
+      { text: "Stage 2 课程首页", link: "/easy-vibe/zh-cn/stage-2/" },
+      { text: "Stage 3 课程首页", link: "/easy-vibe/zh-cn/stage-3/" },
+      { text: "附录知识库", link: "/easy-vibe/zh-cn/appendix/" },
+    ],
+  },
+  {
+    text: "新手入门 Stage 1",
+    collapsed: false,
+    items: [
+      { text: "学习地图", link: "/easy-vibe/zh-cn/stage-1/learning-map/" },
+      { text: "AI 时代，会说话就会编程", link: "/easy-vibe/zh-cn/stage-1/introduction-to-ai-ide/" },
+      { text: "找到好点子", link: "/easy-vibe/zh-cn/stage-1/finding-great-idea/" },
+      { text: "搭建产品原型", link: "/easy-vibe/zh-cn/stage-1/building-prototype/" },
+      { text: "接入 AI 能力", link: "/easy-vibe/zh-cn/stage-1/integrating-ai-capabilities/" },
+      { text: "完整项目实战", link: "/easy-vibe/zh-cn/stage-1/complete-project-practice/" },
+      { text: "从游戏理解 AI 能力", link: "/easy-vibe/zh-cn/stage-1/ai-capabilities-through-games/" },
+    ],
+  },
+  {
+    text: "Stage 1 附录",
+    collapsed: true,
+    items: [
+      { text: "产品思维与方案设计", link: "/easy-vibe/zh-cn/stage-1/appendix-a-product-thinking/" },
+      { text: "常见错误", link: "/easy-vibe/zh-cn/stage-1/appendix-b-common-errors/" },
+      { text: "AI 消费场景灵感", link: "/easy-vibe/zh-cn/stage-1/appendix-c-consumer-scenarios/" },
+      { text: "AI 消费场景补充", link: "/easy-vibe/zh-cn/stage-1/appendix-consumer-scenarios/" },
+      { text: "双钻模型", link: "/easy-vibe/zh-cn/stage-1/appendix-double-diamond/" },
+      { text: "从哪里找点子", link: "/easy-vibe/zh-cn/stage-1/appendix-idea-sources/" },
+      { text: "AI 行业应用场景", link: "/easy-vibe/zh-cn/stage-1/appendix-industry-scenarios/" },
+      { text: "Jobs to Be Done", link: "/easy-vibe/zh-cn/stage-1/appendix-jobs-to-be-done/" },
+      { text: "MOM 测试", link: "/easy-vibe/zh-cn/stage-1/appendix-mom-test/" },
+    ],
+  },
+  {
+    text: "初中级开发 Stage 2",
+    collapsed: false,
+    items: [
+      { text: "课程总览", link: "/easy-vibe/zh-cn/stage-2/" },
+      { text: "素材生产 Agent", link: "/easy-vibe/zh-cn/stage-2/frontend/lovart-assets/" },
+      { text: "Figma 与 MasterGo", link: "/easy-vibe/zh-cn/stage-2/frontend/figma-mastergo/" },
+      { text: "UI 设计入门", link: "/easy-vibe/zh-cn/stage-2/frontend/ui-design/" },
+      { text: "多产品界面规范", link: "/easy-vibe/zh-cn/stage-2/frontend/multi-product-ui/" },
+      { text: "用 LLM Skills 美化界面", link: "/easy-vibe/zh-cn/stage-2/frontend/llm-skills-beautiful/" },
+      { text: "霍格沃茨画像实战", link: "/easy-vibe/zh-cn/stage-2/frontend/hogwarts-portraits/" },
+      { text: "设计稿到代码", link: "/easy-vibe/zh-cn/stage-2/frontend/design-to-code/" },
+      { text: "现代组件库升级", link: "/easy-vibe/zh-cn/stage-2/frontend/modern-component-library/" },
+      { text: "Git 与 Github", link: "/easy-vibe/zh-cn/stage-2/backend/git-workflow/" },
+      { text: "数据库与 Supabase", link: "/easy-vibe/zh-cn/stage-2/backend/database-supabase/" },
+      { text: "后端接口开发", link: "/easy-vibe/zh-cn/stage-2/backend/ai-interface-code/" },
+      { text: "Zeabur 部署", link: "/easy-vibe/zh-cn/stage-2/backend/zeabur-deployment/" },
+      { text: "CLI AI 编程工具", link: "/easy-vibe/zh-cn/stage-2/backend/modern-cli/" },
+      { text: "Stripe 支付集成", link: "/easy-vibe/zh-cn/stage-2/backend/stripe-payment/" },
+      { text: "Dify 与知识库", link: "/easy-vibe/zh-cn/stage-2/ai-capabilities/dify-knowledge-base/" },
+    ],
+  },
+  {
+    text: "Stage 2 大作业与扩展",
+    collapsed: true,
+    items: [
+      { text: "大作业 1：文案生成 SaaS", link: "/easy-vibe/zh-cn/stage-2/assignments/copywriting-platform-supabase/" },
+      { text: "大作业 2：在线考试系统", link: "/easy-vibe/zh-cn/stage-2/assignments/exam-management-express/" },
+      { text: "现代落地页工程", link: "/easy-vibe/zh-cn/stage-2/assignments/modern-landing-page/" },
+      { text: "类 Dify 智能体平台", link: "/easy-vibe/zh-cn/stage-2/assignments/custom-dify-agent-platform/" },
+      { text: "旅行规划 Agent 平台", link: "/easy-vibe/zh-cn/stage-2/assignments/travel-planning-agent-platform/" },
+      { text: "Spring Boot 电影推荐", link: "/easy-vibe/zh-cn/stage-2/assignments/movie-recommendation-springboot/" },
+      { text: "生鲜电商微服务系统", link: "/easy-vibe/zh-cn/stage-2/assignments/simple-grocery-microservices/" },
+      { text: "Go 交通数据可视化", link: "/easy-vibe/zh-cn/stage-2/assignments/traffic-data-visualization-go/" },
+    ],
+  },
+  {
+    text: "高级开发 Stage 3",
+    collapsed: false,
+    items: [
+      { text: "课程总览", link: "/easy-vibe/zh-cn/stage-3/" },
+      { text: "Claude Code 核心指南", link: "/easy-vibe/zh-cn/stage-3/core-skills/basics/" },
+      { text: "MCP 完全指南", link: "/easy-vibe/zh-cn/stage-3/core-skills/mcp/" },
+      { text: "Skills 完全指南", link: "/easy-vibe/zh-cn/stage-3/core-skills/skills/" },
+      { text: "长时间任务处理", link: "/easy-vibe/zh-cn/stage-3/core-skills/long-running-tasks/" },
+      { text: "Agent Teams", link: "/easy-vibe/zh-cn/stage-3/core-skills/agent-teams/" },
+      { text: "Superpowers 工程级开发", link: "/easy-vibe/zh-cn/stage-3/core-skills/superpowers/" },
+      { text: "工作流最佳实践", link: "/easy-vibe/zh-cn/stage-3/core-skills/workflow/" },
+      { text: "Spec Coding", link: "/easy-vibe/zh-cn/stage-3/core-skills/spec-coding/" },
+      { text: "Claude Agent SDK", link: "/easy-vibe/zh-cn/stage-3/core-skills/claude-agent-sdk/" },
+      { text: "移动端开发", link: "/easy-vibe/zh-cn/stage-3/core-skills/mobile-development/" },
+    ],
+  },
+  {
+    text: "Stage 3 多平台与高级 AI",
+    collapsed: true,
+    items: [
+      { text: "平台选型", link: "/easy-vibe/zh-cn/stage-3/cross-platform/choose-platform/" },
+      { text: "微信小程序", link: "/easy-vibe/zh-cn/stage-3/cross-platform/wechat-miniprogram/" },
+      { text: "微信小程序（含后端）", link: "/easy-vibe/zh-cn/stage-3/cross-platform/wechat-miniprogram-backend/" },
+      { text: "Android 应用开发", link: "/easy-vibe/zh-cn/stage-3/cross-platform/android-app/" },
+      { text: "iOS 应用开发", link: "/easy-vibe/zh-cn/stage-3/cross-platform/ios-app/" },
+      { text: "PWA 本地应用", link: "/easy-vibe/zh-cn/stage-3/cross-platform/pwa-local-app/" },
+      { text: "浏览器 AI 插件", link: "/easy-vibe/zh-cn/stage-3/cross-platform/browser-ai-extension/" },
+      { text: "Electron 桌面应用", link: "/easy-vibe/zh-cn/stage-3/cross-platform/electron-voice-to-text/" },
+      { text: "NFT 铸造", link: "/easy-vibe/zh-cn/stage-3/cross-platform/nft-minting/" },
+      { text: "VS Code 插件开发", link: "/easy-vibe/zh-cn/stage-3/cross-platform/vscode-extension/" },
+      { text: "Qt 工业桌面应用", link: "/easy-vibe/zh-cn/stage-3/cross-platform/qt-industrial-hmi/" },
+      { text: "个人网页与博客", link: "/easy-vibe/zh-cn/stage-3/personal-brand/personal-website-blog/" },
+      { text: "RAG 入门", link: "/easy-vibe/zh-cn/stage-3/ai-advanced/rag-introduction/" },
+      { text: "LangGraph 高级 RAG", link: "/easy-vibe/zh-cn/stage-3/ai-advanced/langgraph-advanced-rag/" },
+      { text: "企业知识库", link: "/easy-vibe/zh-cn/stage-3/ai-advanced/llamaindex-enterprise-knowledge-base/" },
+    ],
+  },
+  {
+    text: "知识附录 Appendix",
+    collapsed: true,
+    items: [
+      { text: "附录首页", link: "/easy-vibe/zh-cn/appendix/" },
+      { text: "计算机基础", link: "/easy-vibe/zh-cn/appendix/1-computer-fundamentals/vibe-coding-fullstack" },
+      { text: "开发环境与工具", link: "/easy-vibe/zh-cn/appendix/2-development-tools/ide-basics" },
+      { text: "调试的艺术", link: "/easy-vibe/zh-cn/appendix/2-development-tools/debugging-art/" },
+      { text: "浏览器与前端", link: "/easy-vibe/zh-cn/appendix/3-browser-and-frontend/javascript-deep-dive" },
+      { text: "服务器与后端", link: "/easy-vibe/zh-cn/appendix/4-server-and-backend/backend-languages" },
+      { text: "数据基础", link: "/easy-vibe/zh-cn/appendix/5-data/database-fundamentals" },
+      { text: "架构与系统设计", link: "/easy-vibe/zh-cn/appendix/6-architecture-and-system-design/system-design-methodology" },
+      { text: "基础设施与运维", link: "/easy-vibe/zh-cn/appendix/7-infrastructure-and-operations/cloud-platforms" },
+      { text: "人工智能", link: "/easy-vibe/zh-cn/appendix/8-artificial-intelligence/llm-principles" },
+      { text: "工程素养", link: "/easy-vibe/zh-cn/appendix/9-engineering-excellence/testing-strategies" },
+    ],
+  },
+  {
+    text: "Vibe Stories",
+    collapsed: true,
+    items: [
+      { text: "故事 1", link: "/easy-vibe/zh-cn/vibe-stories/story-1/" },
+      { text: "故事 2", link: "/easy-vibe/zh-cn/vibe-stories/story-2/" },
+      { text: "故事 3", link: "/easy-vibe/zh-cn/vibe-stories/story-3/" },
+      { text: "故事 4", link: "/easy-vibe/zh-cn/vibe-stories/story-4/" },
+    ],
+  },
+];
+
 export default defineConfig({
   lang: "zh-CN",
   // 统一站点标题，前台标题栏与页面标题都会使用这里的名称。
@@ -14,7 +157,7 @@ export default defineConfig({
     nav: [
       { text: "归档", link: "/pages/archives" },
       { text: "标签", link: "/pages/tags" },
-      { text: "Easy-Vibe", link: "/easy-vibe/zh-cn/" },
+      { text: "Easy-Vibe 全套教程", link: "/easy-vibe/zh-cn/" },
       { text: "数据", link: "/pages/site-data" },
     ],
     search: {
@@ -22,20 +165,7 @@ export default defineConfig({
     },
     socialLinks: [{ icon: "github", link: "https://github.com/1024kbT/my-blog" }],
     sidebar: {
-      "/easy-vibe/zh-cn/": [
-        {
-          text: "Easy-Vibe 全量内容",
-          collapsed: false,
-          items: [
-            { text: "首页", link: "/easy-vibe/zh-cn/" },
-            { text: "Stage 1 学习地图", link: "/easy-vibe/zh-cn/stage-1/learning-map/" },
-            { text: "Stage 2 课程导航", link: "/easy-vibe/zh-cn/stage-2/" },
-            { text: "Stage 3 课程导航", link: "/easy-vibe/zh-cn/stage-3/" },
-            { text: "附录知识库", link: "/easy-vibe/zh-cn/appendix/" },
-            { text: "Vibe Stories", link: "/easy-vibe/zh-cn/vibe-stories/story-1/" },
-          ],
-        },
-      ],
+      "/easy-vibe/zh-cn/": easyVibeSidebar,
       "/posts/engineering/": [
         {
           text: "新手入门",
