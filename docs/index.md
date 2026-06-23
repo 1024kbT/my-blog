@@ -27,24 +27,107 @@ features:
 
 <div class="home-overview">
   <div class="home-overview__intro">
-    <span class="home-overview__label">ABOUT THIS SITE</span>
+    <span class="home-overview__label">LEARNING HUB</span>
     <p>
-      这里不只是放文章，也不想把它做成太像“作品封面”的首页。我更希望它像一个稳定的技术写作空间：内容可以被分类、被检索、被回看，也能随着时间慢慢长大。
+      我把这个博客往“个人知识库 + 学习路径”方向继续收了。现在它不只是文章列表，而是把 AI 产品、架构、工程实践和长期写作整理成可以直接顺着读的路线。
     </p>
   </div>
   <div class="home-overview__stats">
     <div class="home-overview__stat">
-      <strong>25+</strong>
-      <span>文章</span>
-    </div>
-    <div class="home-overview__stat">
-      <strong>8</strong>
-      <span>专题分组</span>
+      <strong>30+</strong>
+      <span>内容节点</span>
     </div>
     <div class="home-overview__stat">
       <strong>4</strong>
-      <span>标签方向</span>
+      <span>主线模块</span>
     </div>
+    <div class="home-overview__stat">
+      <strong>1</strong>
+      <span>统一入口</span>
+    </div>
+  </div>
+</div>
+
+## 学习路径
+
+<div class="home-path-grid">
+  <a class="home-path-card" href="./posts/engineering/ai-building-learning-map.html">
+    <span class="home-path-card__label">PATH 01</span>
+    <h3>我想先跑通 AI 产品原型</h3>
+    <p>从学习地图、工具选择、点子判断、原型搭建到模型接入，先完成一条最小产品闭环。</p>
+  </a>
+  <a class="home-path-card" href="./pages/tags/ai-engineering.html">
+    <span class="home-path-card__label">PATH 02</span>
+    <h3>我想系统补 AI 工程方法</h3>
+    <p>把专题文章按模块聚合阅读，更适合长期补课、回查和整理自己的方法库。</p>
+  </a>
+  <a class="home-path-card" href="./posts/ai-architecture/overall-architecture-layered-design.html">
+    <span class="home-path-card__label">PATH 03</span>
+    <h3>我想继续看系统架构与 Agent</h3>
+    <p>从整体分层、核心能力到基础设施，把终端 AI 助手的工程结构慢慢拆开。</p>
+  </a>
+</div>
+
+## 内容导航
+
+<div class="home-syllabus">
+  <section class="home-syllabus__card">
+    <span class="home-syllabus__kicker">MODULE A</span>
+    <h3>新手入门</h3>
+    <ul>
+      <li><a href="./posts/engineering/ai-building-learning-map.html">学习地图</a></li>
+      <li><a href="./posts/engineering/ai-era-conversational-programming.html">AI 时代，会说话就会编程</a></li>
+    </ul>
+  </section>
+  <section class="home-syllabus__card">
+    <span class="home-syllabus__kicker">MODULE B</span>
+    <h3>产品原型实战</h3>
+    <ul>
+      <li><a href="./posts/engineering/ai-tools-for-builders.html">学会 AI 编程工具</a></li>
+      <li><a href="./posts/engineering/how-to-find-good-ai-product-ideas.html">找到好点子</a></li>
+      <li><a href="./posts/engineering/building-ai-product-prototype.html">搭建产品原型</a></li>
+      <li><a href="./posts/engineering/integrating-ai-capabilities-into-product.html">接入 AI 能力</a></li>
+      <li><a href="./posts/engineering/complete-ai-project-practice.html">完整项目实战</a></li>
+    </ul>
+  </section>
+  <section class="home-syllabus__card">
+    <span class="home-syllabus__kicker">MODULE C</span>
+    <h3>附录：业务思维</h3>
+    <ul>
+      <li><a href="./posts/engineering/product-thinking-and-solution-design.html">产品思维与方案设计</a></li>
+      <li><a href="./posts/engineering/b2b-ai-scenario-reference.html">AI 行业应用场景参考（B端）</a></li>
+      <li><a href="./posts/engineering/c2c-ai-scenario-reference.html">AI 消费场景灵感参考（C端）</a></li>
+    </ul>
+  </section>
+  <section class="home-syllabus__card">
+    <span class="home-syllabus__kicker">MODULE D</span>
+    <h3>附录：用户研究与需求验证</h3>
+    <ul>
+      <li><a href="./posts/engineering/where-to-find-good-ideas.html">从哪里找点子</a></li>
+      <li><a href="./posts/engineering/double-diamond-for-ai-validation.html">双钻模型</a></li>
+      <li><a href="./posts/engineering/jobs-to-be-done-for-ai-products.html">Jobs to Be Done</a></li>
+    </ul>
+  </section>
+</div>
+
+## 如何开始
+
+<div class="home-suggestion-list">
+  <div class="home-suggestion-item">
+    <strong>如果你是零基础：</strong>
+    <span>先从 <a href="./posts/engineering/ai-building-learning-map.html">学习地图</a> 和 <a href="./posts/engineering/ai-era-conversational-programming.html">AI 时代，会说话就会编程</a> 开始。</span>
+  </div>
+  <div class="home-suggestion-item">
+    <strong>如果你想做产品原型：</strong>
+    <span>直接顺着“学会工具 → 找点子 → 搭原型 → 接能力 → 完整项目”这条主线往下走。</span>
+  </div>
+  <div class="home-suggestion-item">
+    <strong>如果你卡在概念和判断上：</strong>
+    <span>优先看业务思维和用户研究附录，把产品价值、场景和需求验证补齐。</span>
+  </div>
+  <div class="home-suggestion-item">
+    <strong>如果你想继续进阶：</strong>
+    <span>再去看架构、AI 助手总览和核心能力那几组长文，补系统设计和工程化视角。</span>
   </div>
 </div>
 
