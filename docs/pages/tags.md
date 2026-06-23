@@ -3,7 +3,7 @@
 <div class="tag-index">
   <a class="tag-index__card" href="./tags/ai-engineering.html">
     <h2>AI 工程</h2>
-    <p>6 篇文章，聚焦 AI 协作、编码准则、长期写作与工程习惯。</p>
+    <p>10 篇文章，聚焦学习路线、AI 协作、编码准则、长期写作与工程习惯。</p>
   </a>
   <a class="tag-index__card" href="./tags/architecture.html">
     <h2>架构</h2>

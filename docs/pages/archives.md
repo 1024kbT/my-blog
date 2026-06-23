@@ -2,6 +2,10 @@
 
 ## 2026
 
+- 2026-06-23 [AI 产品与应用开发学习地图](../posts/engineering/ai-building-learning-map.md)
+- 2026-06-23 [零基础入门：从会用到会搭一个 AI 小工具](../posts/engineering/ai-building-stage-1-foundation.md)
+- 2026-06-23 [初中级进阶：把 AI Demo 做成真正可用的小产品](../posts/engineering/ai-building-stage-2-productization.md)
+- 2026-06-23 [高级开发：从功能实现走向系统设计](../posts/engineering/ai-building-stage-3-advanced-systems.md)
 - 2026-06-05 [土区账号注册与订阅教程](../posts/dev/turkey-region-registration-playbook.md)
 - 2026-06-05 [我如何整理长期技术写作的素材池](../posts/engineering/how-i-organize-long-term-technical-writing.md)
 - 2026-06-05 [做一个可维护的前端博客系统，我会先守住什么](../posts/architecture/building-a-maintainable-frontend-blog-system.md)

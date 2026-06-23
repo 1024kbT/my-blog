@@ -51,6 +51,22 @@ export default defineConfig({
           collapsed: false,
           items: [
             {
+              text: "AI 产品与应用开发学习地图",
+              link: "/posts/engineering/ai-building-learning-map",
+            },
+            {
+              text: "零基础入门：从会用到会搭一个 AI 小工具",
+              link: "/posts/engineering/ai-building-stage-1-foundation",
+            },
+            {
+              text: "初中级进阶：把 AI Demo 做成真正可用的小产品",
+              link: "/posts/engineering/ai-building-stage-2-productization",
+            },
+            {
+              text: "高级开发：从功能实现走向系统设计",
+              link: "/posts/engineering/ai-building-stage-3-advanced-systems",
+            },
+            {
               text: "你不知道的 Claude Code：架构、治理与工程实践",
               link: "/posts/ai/claude-code-architecture-governance-engineering-practice",
             },

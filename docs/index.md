@@ -51,6 +51,26 @@ features:
 ## 最新文章
 
 <div class="home-post-grid">
+  <a class="home-post-card" href="./posts/engineering/ai-building-learning-map.html">
+    <span class="home-post-card__tag">AI 学习路线</span>
+    <h3>AI 产品与应用开发学习地图</h3>
+    <p>把零基础入门、初中级进阶和高级开发拆成三层，适合长期补课和知识归档。</p>
+  </a>
+  <a class="home-post-card" href="./posts/engineering/ai-building-stage-1-foundation.html">
+    <span class="home-post-card__tag">零基础</span>
+    <h3>零基础入门：从会用到会搭一个 AI 小工具</h3>
+    <p>先打通最小调用链、提示词和页面状态，再做出第一个真正可运行的 AI 工具。</p>
+  </a>
+  <a class="home-post-card" href="./posts/engineering/ai-building-stage-2-productization.html">
+    <span class="home-post-card__tag">初中级</span>
+    <h3>初中级进阶：把 AI Demo 做成真正可用的小产品</h3>
+    <p>开始关心多轮对话、模板、错误状态和部署，把 Demo 收成一个可用的小产品。</p>
+  </a>
+  <a class="home-post-card" href="./posts/engineering/ai-building-stage-3-advanced-systems.html">
+    <span class="home-post-card__tag">高级开发</span>
+    <h3>高级开发：从功能实现走向系统设计</h3>
+    <p>把模型、日志、成本、工具和数据边界放进一套可持续维护的系统思路里。</p>
+  </a>
   <a class="home-post-card" href="./posts/engineering/how-i-organize-long-term-technical-writing.html">
     <span class="home-post-card__tag">AI 工程</span>
     <h3>我如何整理长期技术写作的素材池</h3>
