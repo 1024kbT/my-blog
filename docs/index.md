@@ -71,6 +71,21 @@ features:
     <h3>高级开发：从功能实现走向系统设计</h3>
     <p>把模型、日志、成本、工具和数据边界放进一套可持续维护的系统思路里。</p>
   </a>
+  <a class="home-post-card" href="./posts/engineering/ai-building-product-practice.html">
+    <span class="home-post-card__tag">产品实战</span>
+    <h3>产品实战：从点子到第一个 AI 产品 Demo</h3>
+    <p>从选题、需求拆解、Prompt 设计到页面交互，把一个 AI 想法压缩成最小可交付产品。</p>
+  </a>
+  <a class="home-post-card" href="./posts/engineering/ai-building-business-thinking.html">
+    <span class="home-post-card__tag">业务思维</span>
+    <h3>业务思维：做 AI 应用时到底该想什么</h3>
+    <p>补上很多技术路线里缺失的一层：场景价值、复用频率、成本与是否值得长期维护。</p>
+  </a>
+  <a class="home-post-card" href="./posts/engineering/ai-building-appendix-resources.html">
+    <span class="home-post-card__tag">附录资源</span>
+    <h3>附录：AI 应用开发的资料、练习与项目清单</h3>
+    <p>把练习顺序、项目清单、复盘方式和阅读建议收成一个能长期回用的资源页。</p>
+  </a>
   <a class="home-post-card" href="./posts/engineering/how-i-organize-long-term-technical-writing.html">
     <span class="home-post-card__tag">AI 工程</span>
     <h3>我如何整理长期技术写作的素材池</h3>

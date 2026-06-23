@@ -67,6 +67,18 @@ export default defineConfig({
               link: "/posts/engineering/ai-building-stage-3-advanced-systems",
             },
             {
+              text: "产品实战：从点子到第一个 AI 产品 Demo",
+              link: "/posts/engineering/ai-building-product-practice",
+            },
+            {
+              text: "业务思维：做 AI 应用时到底该想什么",
+              link: "/posts/engineering/ai-building-business-thinking",
+            },
+            {
+              text: "附录：AI 应用开发的资料、练习与项目清单",
+              link: "/posts/engineering/ai-building-appendix-resources",
+            },
+            {
               text: "你不知道的 Claude Code：架构、治理与工程实践",
               link: "/posts/ai/claude-code-architecture-governance-engineering-practice",
             },
