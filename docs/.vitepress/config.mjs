@@ -14,6 +14,7 @@ export default defineConfig({
     nav: [
       { text: "归档", link: "/pages/archives" },
       { text: "标签", link: "/pages/tags" },
+      { text: "Easy-Vibe", link: "/easy-vibe/zh-cn/" },
       { text: "数据", link: "/pages/site-data" },
     ],
     search: {
@@ -21,6 +22,20 @@ export default defineConfig({
     },
     socialLinks: [{ icon: "github", link: "https://github.com/1024kbT/my-blog" }],
     sidebar: {
+      "/easy-vibe/zh-cn/": [
+        {
+          text: "Easy-Vibe 全量内容",
+          collapsed: false,
+          items: [
+            { text: "首页", link: "/easy-vibe/zh-cn/" },
+            { text: "Stage 1 学习地图", link: "/easy-vibe/zh-cn/stage-1/learning-map/" },
+            { text: "Stage 2 课程导航", link: "/easy-vibe/zh-cn/stage-2/" },
+            { text: "Stage 3 课程导航", link: "/easy-vibe/zh-cn/stage-3/" },
+            { text: "附录知识库", link: "/easy-vibe/zh-cn/appendix/" },
+            { text: "Vibe Stories", link: "/easy-vibe/zh-cn/vibe-stories/story-1/" },
+          ],
+        },
+      ],
       "/posts/engineering/": [
         {
           text: "新手入门",
